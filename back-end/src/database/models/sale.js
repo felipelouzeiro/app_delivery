@@ -28,7 +28,7 @@ const attributes = {
   },
   sale_date: {
     allowNull: false,
-    type: DataTypes.DATETIME,
+    type: DataTypes.DATE,
   },
   status: {
     allowNull: false,
