@@ -1,10 +1,12 @@
-// const Joi = require('joi');
+const Joi = require('joi');
 
-// const loginSchema = Joi.object({
-//   registry: Joi.string().required(),
-//   password: Joi.string().required(),
-// });
+const registerSchema = Joi.object({
+  name: Joi.string().min(12).required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+  role: Joi.required(),
+})
 
-// module.exports = {
-//   loginSchema
-// }
+module.exports = {
+  registerSchema,
+};
