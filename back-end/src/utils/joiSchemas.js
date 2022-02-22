@@ -1,10 +1,10 @@
-// const Joi = require('joi');
+const Joi = require('joi');
 
-// const loginSchema = Joi.object({
-//   registry: Joi.string().required(),
-//   password: Joi.string().required(),
-// });
+const loginSchema = Joi.object({
+  registry: Joi.string().required().empty(),
+  password: Joi.string().required().empty(),
+});
 
-// module.exports = {
-//   loginSchema
-// }
+module.exports = {
+  loginSchema,
+};
