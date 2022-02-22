@@ -1,7 +1,11 @@
 const express = require('express');
+const errorHandler = require('../middlewares/errorHandler');
+const router = require('./routes');
 
 const app = express();
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use(express.json());
+app.use(router);
+app.use(errorHandler);
 
 module.exports = app;
