@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const errorConstructor = require('./errorConstructor')
 const path = require('path');
 const fs = require('fs');
 
@@ -20,6 +21,17 @@ const generateToken = (user) => {
   return token;
 };
 
+const verifyToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, secretJwt);
+    const { data } = decoded; 
+    return data;
+  } catch (error) {
+    throw errorConstructor(Unauthorized, 'jwt malformed');
+  }
+}
+
 module.exports = {
   generateToken,
+  verifyToken,
 };
