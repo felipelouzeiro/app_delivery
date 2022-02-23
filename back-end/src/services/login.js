@@ -1,29 +1,27 @@
-// const Joi = require('joi');
-// const usersModel = require('../models/users');
-// const { unauthorized } = require('../utils/dictionary');
-// const errorConstructor = require('../utils/errorConstructor');
+const errorConstructor = require('../utils/errorConstructor');
+const { loginSchema } = require('../utils/joiSchemas');
+const { unauthorized } = require('../utils/dictionary');
+const { User } = require('../database/models');
+const { generateToken } = require('../utils/auth');
 
-// const loginSchema = Joi.object({
-//   registry: Joi.string().required(),
-//   password: Joi.string().required(),
-// });
+const loginService = async (email, password) => {
+  const { error } = loginSchema.validate({ email, password });
 
-// const login = async (registry, password) => {
-//   const { error } = loginSchema.validate({ registry, password });
+  if (error) throw errorConstructor(unauthorized, error.message);
 
-//   if (error) throw errorConstructor(unauthorized, error.message);
+  const user = await User.findOne({ where: { email } });
 
-//   // encontrar usuário no banco de dados
-//   const user = await usersModel.findByRegistry(registry);
+  if (!user || user.password !== password) {
+    throw errorConstructor(unauthorized, 'Incorrect email or password');
+  }
 
-//   // retorno caso senha incorreta ou usuário não encontrado
-//   if (!user || user.password !== password) {
-//     throw errorConstructor(unauthorized, 'Incorrect CPF or password');
-//   }
+  const { password: _password, ...userWithoutPassword } = user;
 
-//   return user;
-// };
+  const token = generateToken(userWithoutPassword);
 
-// module.exports = {
-//   login,
-// };
+  return token;
+};
+
+module.exports = {
+  loginService,
+};
