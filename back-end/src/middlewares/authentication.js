@@ -6,11 +6,11 @@ const authentication = async (req, _res, next) => {
   try {
     const { authorization } = req.headers;
 
-    if (!authorization) throw errorConstructor(unauthorized, 'missing auth token')
+    if (!authorization) throw errorConstructor(unauthorized, 'missing auth token');
     
     const user = await verifyToken(authorization);
 
-    if (!user)throw errorConstructor(unauthorized, 'expired token')
+    if (!user) throw errorConstructor(unauthorized, 'expired token');
 
     req.user = user;
 
