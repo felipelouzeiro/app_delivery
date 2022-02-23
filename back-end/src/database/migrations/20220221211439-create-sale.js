@@ -36,12 +36,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       saleDate: {
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.fn('now'),
         type: Sequelize.DATE,
       },
       status: {
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'Pendente',
         type: Sequelize.STRING,
       }

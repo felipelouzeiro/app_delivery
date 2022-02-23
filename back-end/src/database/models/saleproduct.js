@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     attributes,
     {
       timestamps: false,
-      tableName: 'salesproducts',
+      tableName: 'salesProducts',
     });
 
   SaleProduct.associate = (models) => {

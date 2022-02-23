@@ -27,11 +27,11 @@ const attributes = {
     type: DataTypes.STRING,
   },
   saleDate: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.DATE,
   },
   status: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   }
 };

@@ -5,20 +5,19 @@ const { unauthorized } = require('../utils/dictionary');
 const { user } = require('../database/models');
 const { generateToken } = require('../utils/JWTServices');
 
-
 const loginService = async (email, password) => {
   const { error } = loginSchema.validate({ email, password });
 
   if (error) throw errorConstructor(unauthorized, error.message);
 
-  const { dataValues } = await user.findOne({ where: { email } });
+  const storedUser = await user.findOne({ where: { email } });
   const encryptedPassword = md5(password);
 
-  if (!dataValues || dataValues.password !== encryptedPassword) {
+  if (!storedUser || storedUser.dataValues.password !== encryptedPassword) {
     throw errorConstructor(unauthorized, 'Incorrect email or password');
   }
 
-  const { password: _password, ...userWithoutPassword } = dataValues;
+  const { password: _password, ...userWithoutPassword } = storedUser.dataValues;
 
   const token = generateToken(userWithoutPassword);
 
