@@ -14,7 +14,7 @@ const attributes = {
     allowNull: false,
     type: DataTypes.DECIMAL(4,2)
   },
-  url_image: {
+  urlImage: {
     allowNull: false,
     type: DataTypes.STRING
   }
