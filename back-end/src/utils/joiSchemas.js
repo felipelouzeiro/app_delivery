@@ -7,6 +7,14 @@ const registerSchema = Joi.object({
   role: Joi.required(),
 });
 
+const salesSchema = Joi.object({
+  userId: Joi.number().required(),
+  sellerId: Joi.number().required(),
+  totalPrice: Joi.number().required(),
+  deliveryAddress: Joi.string().required(),
+  deliveryNumber: Joi.string().required(),
+});
+
 const loginSchema = Joi.object({
   email: Joi.string().required().empty(),
   password: Joi.string().required().empty(),
@@ -15,4 +23,5 @@ const loginSchema = Joi.object({
 module.exports = {
   loginSchema,
   registerSchema,
+  salesSchema,
 };
