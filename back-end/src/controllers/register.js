@@ -6,9 +6,7 @@ const register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
 
-    const user = await registerService.registerUser(name, email, password, role);
-
-    const token = generateToken(user);
+    const token = await registerService.registerUser(name, email, password, role);
     
     return res.status(created).json({ token });
   } catch (error) {

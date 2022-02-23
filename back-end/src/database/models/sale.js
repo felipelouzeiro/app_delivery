@@ -6,27 +6,27 @@ const attributes = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  user_id: {
+  userId: {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
-  seller_id: {
+  sellerId: {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
-  total_price: {
+  totalPrice: {
     allowNull: false,
     type: DataTypes.DECIMAL(9,2),
   },
-  delivery_address: {
+  deliveryAddress: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  delivery_number: {
+  deliveryNumber: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  sale_date: {
+  saleDate: {
     allowNull: false,
     type: DataTypes.DATE,
   },
