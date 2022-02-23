@@ -1,6 +1,6 @@
 const registerService = require('../services/register');
 const { created } = require('../utils/dictionary');
-const { generateToken } = require('../utils/auth');
+const { generateToken } = require('../utils/JWTServices');
 
 const register = async (req, res, next) => {
   try {

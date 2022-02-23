@@ -15,7 +15,7 @@ const registerUser = async (name, email, password, role) => {
   const { dataValues } = await User.create({ name, email, password: hash, role });
   
   return dataValues;
-}
+};
 
 module.exports = {
   registerUser,

@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs');
+const errorConstructor = require('./errorConstructor');
+const { unauthorized } = require('./dictionary');
 
 const secretJwt = fs
   .readFileSync(
@@ -20,6 +22,17 @@ const generateToken = (user) => {
   return token;
 };
 
+const verifyToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, secretJwt);
+    const { data } = decoded; 
+    return data;
+  } catch (error) {
+    throw errorConstructor(unauthorized, 'jwt malformed');
+  }
+};
+
 module.exports = {
   generateToken,
+  verifyToken,
 };
