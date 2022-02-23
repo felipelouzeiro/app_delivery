@@ -7,7 +7,6 @@ const register = async (req, res, next) => {
     const { name, email, password, role } = req.body;
 
     const user = await registerService.registerUser(name, email, password, role);
-    console.log('🚀 ~ file: register.js ~ line 10 ~ register ~ user', user);
 
     const token = generateToken(user);
     
