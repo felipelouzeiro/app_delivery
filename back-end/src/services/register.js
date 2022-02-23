@@ -13,6 +13,7 @@ const registerUser = async (name, email, password, role) => {
   if (emailExist) throw errorConstructor(conflict, 'Email already exist');
 
   const hash = md5(password);
+  
   const { dataValues } = await user.create({ name, email, password: hash, role });
   const token = generateToken(dataValues);
 

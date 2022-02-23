@@ -3,7 +3,8 @@ const errorConstructor = require('../utils/errorConstructor');
 const { loginSchema } = require('../utils/joiSchemas');
 const { unauthorized } = require('../utils/dictionary');
 const { user } = require('../database/models');
-const { generateToken } = require('../utils/auth');
+const { generateToken } = require('../utils/JWTServices');
+
 
 const loginService = async (email, password) => {
   const { error } = loginSchema.validate({ email, password });
