@@ -1,4 +1,4 @@
-const { verifyToken } = require('../utils/auth');
+const { verifyToken } = require('../utils/JWTServices');
 const { unauthorized } = require('../utils/dictionary');
 const errorConstructor = require('../utils/errorConstructor');
 
