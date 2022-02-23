@@ -3,7 +3,7 @@ const { user } = require('../database/models');
 const { badRequest, conflict } = require('../utils/dictionary');
 const errorConstructor = require('../utils/errorConstructor');
 const { registerSchema } = require('../utils/joiSchemas');
-const { generateToken } = require('../utils/auth');
+const { generateToken } = require('../utils/JWTServices');
 
 const registerUser = async (name, email, password, role) => {
   const { error } = registerSchema.validate({ name, email, password, role });
