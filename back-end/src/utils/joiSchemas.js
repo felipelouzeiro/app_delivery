@@ -13,6 +13,7 @@ const salesSchema = Joi.object({
   totalPrice: Joi.number().required(),
   deliveryAddress: Joi.string().required(),
   deliveryNumber: Joi.string().required(),
+  products: Joi.array().required(),
 });
 
 const loginSchema = Joi.object({
