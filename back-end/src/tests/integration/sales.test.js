@@ -1,26 +1,36 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
+const { user } = require('../../database/models');
+
 chai.use(chaiHttp);
 const { expect } = chai;
 
 const app = require('../../api/app');
 const { badRequest, created } = require('../../utils/dictionary');
 
-describe('Route POST /register', () => {
+describe('Route POST /sales', () => {
   describe('when the body passed is not valid', () => {
-    let postRegister;
+    let postSales;
+    let token;
 
     before(async () => {
       try {
-        postRegister = await chai.request(app)
-          .post('/register')
+        await user.create({
+          name: "henrique cursino",
+          email: "cursino@email.com",
+          password: "123456",
+          role: "customer"
+        })
+        token = await chai.request(app)
+          .post('/login')
           .send({
-            name: "henrique",
             email: "cursino@email.com",
             password: "123456",
-            role: "customer"
-          });
+          })
+          .then((res) => res.body.token);
+
+        postSales =
 
       } catch (error) {
         console.error(error.message);
