@@ -8,6 +8,7 @@ const { expect } = chai;
 
 const app = require('../../api/app');
 const { badRequest, created, unauthorized } = require('../../utils/dictionary');
+const md5 = require('md5');
 
 describe('Route POST /sales', () => {
   describe('if there is no token', () => {
@@ -102,10 +103,11 @@ describe('Route POST /sales', () => {
 
     before(async () => {
       try {
+        const hash = md5('123456');
         await user.create({
           name: "henrique cursino",
           email: "cursino@email.com",
-          password: "123456",
+          password: hash,
           role: "customer"
         })
         token = await chai.request(app)
