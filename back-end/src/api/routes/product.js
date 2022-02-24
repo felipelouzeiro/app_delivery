@@ -4,6 +4,4 @@ const { authentication } = require('../../middlewares/authentication');
 
 productRouter.get('/', authentication, getProductController);
 
-module.exports = {
-  productRouter,
-};
+module.exports = productRouter;
