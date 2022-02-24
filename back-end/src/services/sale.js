@@ -7,7 +7,7 @@ const createSale = async (salesInfo, userId) => {
   const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = salesInfo;
 
   const { error } = salesSchema
-    .validate({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumber });
+    .validate({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products });
   if (error) throw errorConstructor(badRequest, error.message);
 
   const { dataValues } = await sale
