@@ -200,7 +200,7 @@ describe('Route POST /login', () => {
         login = await chai.request(app)
           .post('/login')
           .send({
-            email: "test@emailcom",
+            email: "test@email.com",
           })
 
       } catch (error) {
@@ -234,7 +234,7 @@ describe('Route POST /login', () => {
         login = await chai.request(app)
           .post('/login')
           .send({
-            email: "test@emailcom",
+            email: "test@email.com",
             password: "",
           })
 
