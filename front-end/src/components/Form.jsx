@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as yup from 'yup';
+import { postLogin } from '../api';
 
 export default function Form() {
   const [loginDisabled, setLoginDisabled] = useState(true);
+  const [errorDisabled, setErrorDisabled] = useState(false);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -22,43 +24,62 @@ export default function Form() {
       });
   }, [login, password, schema]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await postLogin(login, password);
+    if (!response) setErrorDisabled(true);
+    else {
+      const { data } = response;
+      localStorage.setItem('token', JSON.stringify(data.token));
+    }
+  };
+
+  const renderError = () => (
+    <p data-testid="common_login__element-invalid-email">
+      Login e/ou senha inválidos
+    </p>
+  );
+
   return (
-    <form>
-      <label htmlFor="login">
-        Login
-        <input
-          value={ login }
-          onChange={ (e) => setLogin(e.target.value) }
-          id="login"
-          data-testid="common_login__input-email"
-          type="text"
-          placeholder="email@trybeer.com.br"
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-          id="password"
-          data-testid="common_login__input-password"
-          type="password"
-          placeholder="*********"
-        />
-      </label>
-      <button
-        disabled={ loginDisabled }
-        data-testid="common_login__button-login"
-        type="submit"
-      >
-        LOGIN
-      </button>
-      <button
-        data-testid="common_login__button-register"
-        type="button"
-      >
-        Ainda não tenho conta
-      </button>
-    </form>
+    <section>
+      <form onSubmit={ handleSubmit }>
+        <label htmlFor="login">
+          Login
+          <input
+            value={ login }
+            onChange={ (e) => setLogin(e.target.value) }
+            id="login"
+            data-testid="common_login__input-email"
+            type="text"
+            placeholder="email@trybeer.com.br"
+          />
+        </label>
+        <label htmlFor="password">
+          Senha
+          <input
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
+            id="password"
+            data-testid="common_login__input-password"
+            type="password"
+            placeholder="*********"
+          />
+        </label>
+        <button
+          disabled={ loginDisabled }
+          data-testid="common_login__button-login"
+          type="submit"
+        >
+          LOGIN
+        </button>
+        <button
+          data-testid="common_login__button-register"
+          type="button"
+        >
+          Ainda não tenho conta
+        </button>
+      </form>
+      {errorDisabled && renderError()}
+    </section>
   );
 }
