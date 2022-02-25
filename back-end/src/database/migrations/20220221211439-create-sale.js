@@ -13,6 +13,7 @@ module.exports = {
           model: 'users',
           key: 'id'
         },
+        field: 'user_id',
         type: Sequelize.INTEGER,
       },
       sellerId: {
@@ -21,22 +22,27 @@ module.exports = {
           model: 'users',
           key: 'id'
         },
+        field: 'seller_id',
         type: Sequelize.INTEGER,
       },
       totalPrice: {
         allowNull: false,
+        field: 'total_price',
         type: Sequelize.DECIMAL(9,2),
       },
       deliveryAddress: {
         allowNull: false,
+        field: 'delivery_address',
         type: Sequelize.STRING,
       },
       deliveryNumber: {
         allowNull: false,
+        field: 'delivery_number',
         type: Sequelize.STRING,
       },
       saleDate: {
         allowNull: true,
+        field: 'sale_date',
         defaultValue: Sequelize.fn('now'),
         type: Sequelize.DATE,
       },
