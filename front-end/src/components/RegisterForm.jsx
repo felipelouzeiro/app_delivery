@@ -18,6 +18,13 @@ export default function RegisterForm() {
       });
   });
 
+  const emptyFields = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setErrorDisabled(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await register({ name, email, password });
@@ -25,6 +32,7 @@ export default function RegisterForm() {
     else {
       const { data: { token } } = response;
       localStorage.setItem('token', JSON.stringify(token));
+      emptyFields();
     }
   };
 
