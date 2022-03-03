@@ -30,8 +30,8 @@ export default function RegisterForm() {
     const response = await register({ name, email, password });
     if (!response) setErrorDisabled(true);
     else {
-      const { data: { token } } = response;
-      localStorage.setItem('token', JSON.stringify(token));
+      const { data } = response;
+      localStorage.setItem('user', JSON.stringify(data));
       emptyFields();
     }
   };

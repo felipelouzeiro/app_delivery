@@ -33,7 +33,7 @@ export default function Form() {
     if (!response) setErrorDisabled(true);
     else {
       const { data } = response;
-      localStorage.setItem('token', JSON.stringify(data.token));
+      localStorage.setItem('user', JSON.stringify(data));
       history.push('/customer/products');
     }
   };
