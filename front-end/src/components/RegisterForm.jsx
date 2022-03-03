@@ -59,6 +59,7 @@ export default function RegisterForm() {
             placeholder="seu-email@site.com.br"
             id="email"
             type="text"
+            data-testid="common_register__input-email"
           />
         </label>
 
