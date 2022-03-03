@@ -1,11 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
   return (
     <Switch>
-      <Route />
+      <Redirect exact from="/" to="/login" />
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
     </Switch>
   );
 }
