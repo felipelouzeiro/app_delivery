@@ -16,12 +16,14 @@ const registerUser = async (name, email, password, role) => {
   
   const { dataValues } = await user.create({ name, email, password: hash, role });
   
-  const { password: _password, id: _id, ...userWithoutPassword } = dataValues;
+  const { password: _password, ...userWithoutPassword } = dataValues;
 
   const token = generateToken(userWithoutPassword);
 
+  const { id: _id, ...userWithoutId } = userWithoutPassword;
+
   const response = {
-    ...userWithoutPassword,
+    ...userWithoutId,
     token,
   };
 
