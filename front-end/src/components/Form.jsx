@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { postLogin } from '../api';
 
@@ -76,12 +76,14 @@ export default function Form() {
         >
           LOGIN
         </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-        >
-          Ainda não tenho conta
-        </button>
+        <Link to="/register">
+          <button
+            data-testid="common_login__button-register"
+            type="button"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
       </form>
       {errorDisabled && renderError()}
     </section>
