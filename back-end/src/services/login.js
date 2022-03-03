@@ -18,10 +18,17 @@ const loginService = async (email, password) => {
   }
 
   const { password: _password, ...userWithoutPassword } = storedUser.dataValues;
-
+  
   const token = generateToken(userWithoutPassword);
+  
+  const { id: _id, ...userWithoutId } = userWithoutPassword;
 
-  return token;
+  const response = {
+    ...userWithoutId,
+    token,
+  };
+  
+  return response;
 };
 
 module.exports = {
