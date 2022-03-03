@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { register } from '../api';
 import { registerSchema } from '../utils/schemas';
 
@@ -10,6 +11,8 @@ export default function RegisterForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+  const history = useHistory();
+
   useEffect(() => {
     registerSchema.isValid({ name, email, password })
       .then((valid) => {
@@ -18,13 +21,6 @@ export default function RegisterForm() {
       });
   });
 
-  const emptyFields = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
-    setErrorDisabled(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await register({ name, email, password });
@@ -32,7 +28,7 @@ export default function RegisterForm() {
     else {
       const { data } = response;
       localStorage.setItem('user', JSON.stringify(data));
-      emptyFields();
+      history.push('/customer/products');
     }
   };
 
