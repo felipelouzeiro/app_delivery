@@ -27,7 +27,6 @@ const loginService = async (email, password) => {
     ...userWithoutId,
     token,
   };
-  console.log('🚀 ~ file: login.js ~ line 25 ~ loginService ~ response', response);
   
   return response;
 };
