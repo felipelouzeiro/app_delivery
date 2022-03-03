@@ -1,9 +1,9 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3001';
 
-// export const getProducts = async () => {
-//   const products = await axios.get(`${BASE_URL}/product`);
+export default async function getProducts() {
+  const products = await axios.get(`${BASE_URL}/product`);
 
-//   return products;
-// };
+  return products;
+}
