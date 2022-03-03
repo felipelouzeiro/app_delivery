@@ -5,9 +5,9 @@ const register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
 
-    const token = await registerService.registerUser(name, email, password, role);
+    const response = await registerService.registerUser(name, email, password, role);
     
-    return res.status(created).json({ token });
+    return res.status(created).json(response);
   } catch (error) {
     console.log(`Register User -> ${error.message}`);
     next(error);

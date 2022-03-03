@@ -17,11 +17,17 @@ const loginService = async (email, password) => {
     throw errorConstructor(unauthorized, 'Incorrect email or password');
   }
 
-  const { password: _password, ...userWithoutPassword } = storedUser.dataValues;
-
+  const { password: _password, id: _id, ...userWithoutPassword } = storedUser.dataValues;
+  
   const token = generateToken(userWithoutPassword);
 
-  return token;
+  const response = {
+    ...userWithoutPassword,
+    token,
+  };
+  console.log('🚀 ~ file: login.js ~ line 25 ~ loginService ~ response', response);
+  
+  return response;
 };
 
 module.exports = {
