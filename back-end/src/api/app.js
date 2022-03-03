@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.use(router);
-app.use('/images', express.static(path.resolve(__dirname, '../images')));
+app.use('/images', express.static(path.resolve(__dirname, '../../public/images')));
 app.use(errorHandler);
 
 module.exports = app;
