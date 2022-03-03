@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { postLogin } from '../api';
 
 export default function Form() {
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [errorDisabled, setErrorDisabled] = useState(false);
+
+  const history = useHistory();
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -31,6 +34,7 @@ export default function Form() {
     else {
       const { data } = response;
       localStorage.setItem('token', JSON.stringify(data.token));
+      history.push('/customer/products');
     }
   };
 
