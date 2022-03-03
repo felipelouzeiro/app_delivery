@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const errorConstructor = require('../utils/errorConstructor');
 const { loginSchema } = require('../utils/joiSchemas');
-const { unauthorized } = require('../utils/dictionary');
+const { unauthorized, notFound } = require('../utils/dictionary');
 const { user } = require('../database/models');
 const { generateToken } = require('../utils/JWTServices');
 
@@ -14,14 +14,21 @@ const loginService = async (email, password) => {
   const encryptedPassword = md5(password);
 
   if (!storedUser || storedUser.dataValues.password !== encryptedPassword) {
-    throw errorConstructor(unauthorized, 'Incorrect email or password');
+    throw errorConstructor(notFound, 'Incorrect email or password');
   }
 
   const { password: _password, ...userWithoutPassword } = storedUser.dataValues;
-
+  
   const token = generateToken(userWithoutPassword);
+  
+  const { id: _id, ...userWithoutId } = userWithoutPassword;
 
-  return token;
+  const response = {
+    ...userWithoutId,
+    token,
+  };
+  
+  return response;
 };
 
 module.exports = {
