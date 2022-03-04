@@ -1,8 +1,10 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
 
-export default function cardMyRequests({ orders, token }) {
+export default function cardMyRequests({ orders }) {
   const history = useHistory();
+
+  const { token } = JSON.parse(localStorage.getItem('user'));
 
   const { role } = token;
   const { id, saleDate, status, totalPrice, deliveryAdress } = orders;
@@ -15,8 +17,8 @@ export default function cardMyRequests({ orders, token }) {
 
   const ADRESS_SELLER = 'seller_orders__element-card-address-';
 
-  function detailOrder(idUser) {
-    history.push(`/${role}/orders/${idUser}`);
+  function detailOrder(idSale) {
+    history.push(`/sales/${idSale}`);
   }
 
   return (
@@ -29,7 +31,7 @@ export default function cardMyRequests({ orders, token }) {
         <p>Pedido</p>
         <p
           data-testid={
-            `${role}_orders__element-order-id-${id}`
+            `customer_orders__element-order-id-${id}`
           }
         >
           {id}
@@ -37,19 +39,19 @@ export default function cardMyRequests({ orders, token }) {
       </div>
 
         <div
-          data-testid={ `${role}_orders__element-delivery-status-${id}` }
+          data-testid={ `customer_orders__element-delivery-status-${id}` }
         >
           <p>{status}</p>
         </div>
 
         <div>
           <p
-            data-testid={ `${role}_orders__element-order-date-${id}` }
+            data-testid={ `customer_orders__element-order-date-${id}` }
           >
             {dateFormat}
           </p>
           <p
-            data-testid={ `${role}_orders__element-card-price-${id}` }
+            data-testid={ `customer_orders__element-card-price-${id}` }
           >
             {totalPrice.replace('.', ',')}
           </p>
