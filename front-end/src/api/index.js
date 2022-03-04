@@ -24,8 +24,12 @@ export const getProducts = async () => {
   const headers = {
     authorization: token,
   };
-  const products = await axios.get(`${BASE_URL}/product`, { headers });
-  return products;
+  try {
+    const products = await axios.get(`${BASE_URL}/product`, { headers });
+    return products;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const register = async (data) => {
