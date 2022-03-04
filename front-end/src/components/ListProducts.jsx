@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getProducts } from '../api';
 import { ProductCard } from './ProductCard';
-import { addProduct } from '../redux/slices/productSlice';
 
 export function ListProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [buttonCart, setButtonCart] = useState(true);
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
-  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const filterCart = () => {
-    const seeCart = chosenProduct.filter((prod) => prod.quantity > 0);
-    dispatch(addProduct(seeCart));
-    console.log(chosenProduct);
+  const checkout = () => {
+    if (chosenProduct.length === 0) return null;
+    history.push('/customer/checkout');
   };
 
   useEffect(() => {
@@ -22,7 +22,6 @@ export function ListProducts() {
   }, []);
 
   useEffect(() => {
-    if (chosenProduct === []) return null;
     let sum = 0;
     chosenProduct.forEach((prod) => {
       sum += prod.price * prod.quantity;
@@ -30,22 +29,36 @@ export function ListProducts() {
     return setTotal(sum);
   }, [chosenProduct]);
 
+  useEffect(() => {
+    if (chosenProduct.length === 0) setButtonCart(true);
+    else setButtonCart(false);
+  }, [chosenProduct]);
+
   return (
-    <div className="product-card-container">
-      { !products && <h1>Loading</h1>}
-      { products.map((prod) => (
-        <ProductCard
-          key={ prod.id }
-          product={ prod }
-        />
-      ))}
+    <>
+      <div className="list-product-container">
+        { !products && <h1>Loading</h1>}
+        { products.map((prod) => (
+          <ProductCard
+            key={ prod.id }
+            product={ prod }
+          />
+        ))}
+      </div>
       <button
         type="button"
-        onClick={ () => { filterCart(); } }
+        onClick={ checkout }
+        disabled={ buttonCart }
+        data-testid="customer_products__button-cart"
       >
-        { `Ver Carrinho: R$ ${total}` }
+        Ver Carrinho: R$
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { total.toFixed(2).replace('.', ',') }
+        </span>
       </button>
-    </div>
+    </>
   );
 }
 
