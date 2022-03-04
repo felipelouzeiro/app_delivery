@@ -15,9 +15,19 @@ const registerUser = async (name, email, password, role) => {
   const hash = md5(password);
   
   const { dataValues } = await user.create({ name, email, password: hash, role });
-  const token = generateToken(dataValues);
+  
+  const { password: _password, ...userWithoutPassword } = dataValues;
 
-  return token;
+  const token = generateToken(userWithoutPassword);
+
+  const { id: _id, ...userWithoutId } = userWithoutPassword;
+
+  const response = {
+    ...userWithoutId,
+    token,
+  };
+
+  return response;
 };
 
 module.exports = {
