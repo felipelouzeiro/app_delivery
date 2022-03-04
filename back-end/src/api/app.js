@@ -3,12 +3,12 @@ const app = require('express')();
 const cors = require('cors');
 const path = require('path');
 const http = require('http').createServer(app);
-const io = require('socket.io')(http, {
-  cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET'],
-  },
-});
+// const io = require('socket.io')(http, {
+//   cors: {
+//     origin: 'http://localhost:3000',
+//     methods: ['GET'],
+//   },
+// });
 const errorHandler = require('../middlewares/errorHandler');
 const router = require('./routes');
 
