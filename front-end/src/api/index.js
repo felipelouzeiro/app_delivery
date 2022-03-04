@@ -3,7 +3,11 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:3001';
 
 export const getProducts = async () => {
-  const products = await axios.get(`${BASE_URL}/product`);
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const headers = {
+    authorization: token,
+  };
+  const products = await axios.get(`${BASE_URL}/product`, { headers });
   return products;
 };
 
