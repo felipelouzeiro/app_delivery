@@ -30,16 +30,24 @@ export function ProductCard(props) {
     });
   };
 
+  const updateByInput = (value) => {
+    const num = value ? Number(value) : 0;
+    setCount(num);
+    buildCart(num);
+  };
+
   return (
     <div className="product-card-container">
       <p
         className="product-price"
         data-testid={ `customer_products__element-card-price-${id}` }
+        /* customer_products__element-card-price-<id> */
       >
-        { price }
+        { price.replace('.', ',') }
 
       </p>
       <img
+        width="20px"
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
@@ -58,11 +66,15 @@ export function ProductCard(props) {
       >
         -
       </button>
-      <span
-        data-testid={ `customer_products__input-card-quantity-${id}` }
-      >
-        {count}
-      </span>
+      <label htmlFor="count-input">
+        <input
+          value={ count }
+          onChange={ (e) => updateByInput(e.target.value) }
+          id="count-input"
+          data-testid={ `customer_products__input-card-quantity-${id}` }
+          type="number"
+        />
+      </label>
       <button
         data-testid={ `customer_products__button-card-add-item-${id}` }
         type="button"
