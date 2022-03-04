@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { register } from '../api';
 import { registerSchema } from '../utils/schemas';
 
@@ -9,6 +10,7 @@ export default function RegisterForm() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     registerSchema.isValid({ name, email, password })
@@ -33,6 +35,7 @@ export default function RegisterForm() {
       const { data } = response;
       localStorage.setItem('user', JSON.stringify(data));
       emptyFields();
+      history.push('/customer/products');
     }
   };
 
