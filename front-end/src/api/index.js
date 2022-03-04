@@ -3,9 +3,9 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:3001';
 
 export const getAllOrders = async () => {
-  const { role, token } = JSON.parse(localStorage.getItem('user'));
+  const { token } = JSON.parse(localStorage.getItem('user'));
 
-  const URL_ORDER = `${BASE_URL}/${role}/sales`;
+  const URL_ORDER = `${BASE_URL}/sales`;
 
   try {
     const { data } = await axios.get(URL_ORDER, {
