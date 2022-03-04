@@ -15,10 +15,9 @@ export const chosenProductsSlice = createSlice({
         ...otherProducts,
         action.payload,
       ];
+      const validProducts = state.chosenProducts.filter((prod) => prod.quantity > 0);
+      state.chosenProducts = [...validProducts];
       console.log(state.chosenProducts);
-    },
-    remove: (state) => {
-      state.value -= 1;
     },
   },
 });
