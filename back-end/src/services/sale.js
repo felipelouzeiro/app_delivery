@@ -23,6 +23,12 @@ const createSale = async (salesInfo, userId) => {
   return true;
 };
 
+const getAll = async (userId) => {
+  const sales = await sale.findAll({ where: { userId } });
+  return sales;
+};
+
 module.exports = {
   createSale,
+  getAll,
 };

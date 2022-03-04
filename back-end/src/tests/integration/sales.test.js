@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 const app = require('../../api/app');
-const { badRequest, created, unauthorized } = require('../../utils/dictionary');
+const { badRequest, created, unauthorized, success } = require('../../utils/dictionary');
 const md5 = require('md5');
 
 describe('Route POST /sales', () => {
@@ -153,6 +153,71 @@ describe('Route POST /sales', () => {
       const { body: { message } } = postSales;
 
       expect(message).to.be.equals('registered sale');
+    });
+  })
+})
+
+describe('Route GET /sales', () => {
+  describe('when there is sales', () => {
+    let getSales;
+    let postSales;
+    let token;
+
+    before(async () => {
+      try {
+        const hash = md5('123456');
+        await user.create({
+          name: "henrique cursino",
+          email: "cursino@email.com",
+          password: hash,
+          role: "customer"
+        })
+        token = await chai.request(app)
+          .post('/login')
+          .send({
+            email: "cursino@email.com",
+            password: "123456",
+          })
+          .then((res) => res.body.token);
+
+        postSales = await chai.request(app)
+          .post('/sales')
+          .send({
+            "sellerId": 2,
+            "totalPrice": 50.00,
+            "deliveryAddress": "exemplo de endereço",
+            "deliveryNumber": "N° 500",
+            "products": [
+              {
+                "productId": 1,
+                "quantity": 5
+              },
+              {
+                "productId": 2,
+                "quantity": 4
+              }
+            ]
+          })
+          .set('authorization', token);        
+        getSales = await chai.request(app)
+          .get('/sales')
+          .set('authorization', token);
+
+      } catch (error) {
+        console.error(error.message);
+      }
+    });
+
+    it('returns 201 - Created', async () => {
+      const { status } = getSales;
+
+      expect(status).to.be.equals(success);
+    });
+
+    it('returns an array', async () => {
+      const { body: { sales } } = getSales;
+
+      expect(sales).to.be.an('array');
     });
   })
 })
