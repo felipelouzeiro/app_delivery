@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 function CheckoutTable() {
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
 
+  const totalPriceEachProduct = (quantity, price) => {
+    const unitPrice = quantity * price;
+    return unitPrice.toFixed(2).replace('.', ',');
+  };
+
   return (
     <div className="checkout-table">
       { console.log(chosenProduct) }
@@ -20,9 +25,22 @@ function CheckoutTable() {
           </tr>
         </thead>
         <tbody>
-          <td>
-            {}
-          </td>
+          { chosenProduct.map((prod, index) => (
+            <tr key={ prod.id }>
+              <td>{ index + 1 }</td>
+              <td>{ prod.name }</td>
+              <td>{ prod.quantity }</td>
+              <td>{ prod.price }</td>
+              <td>{ () => { totalPriceEachProduct(prod.quantity, prod.price); } }</td>
+              <td>
+                <button
+                  type="button"
+                >
+                  Remover Item
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
