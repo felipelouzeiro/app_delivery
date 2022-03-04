@@ -1,5 +1,5 @@
 const saleService = require('../services/sale');
-const { created } = require('../utils/dictionary');
+const { created, success } = require('../utils/dictionary');
 
 const register = async (req, res, next) => {
   try {
@@ -15,6 +15,19 @@ const register = async (req, res, next) => {
   }
 };
 
+const getAll = async (req, res, next) => {
+  try {
+    const { id: userId } = req.user;
+    const sales = await saleService.getAll(userId);
+
+    return res.status(success).json({ sales });
+  } catch (error) {
+    console.log(`Get all Sales -> ${error.message}`);
+    next(error);
+  }
+};
+
 module.exports = {
   register,
+  getAll,
 };
