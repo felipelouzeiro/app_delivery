@@ -67,7 +67,7 @@ describe('Route POST /register', () => {
     it('returns a token', async () => {
       const { body } = postRegister;
 
-      expect(body).to.have.all.keys('token');
+      expect(body).to.have.all.keys('email', 'name', 'role', 'token');
     });
   })
 })
