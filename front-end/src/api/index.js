@@ -10,7 +10,7 @@ export const getAllOrders = async () => {
   try {
     const { data } = await axios.get(URL_ORDER, {
       headers: {
-        Authorization: token,
+        authorization: token,
       },
     });
     return data;
