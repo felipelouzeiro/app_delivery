@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function cardMyRequests({ orders }) {
+function CardMyRequests({ orders }) {
   const history = useHistory();
 
   const { token } = JSON.parse(localStorage.getItem('user'));
@@ -17,14 +18,14 @@ export default function cardMyRequests({ orders }) {
 
   const ADRESS_SELLER = 'seller_orders__element-card-address-';
 
-  function detailOrder(idSale) {
+  const detailOrder = (idSale) => {
     history.push(`/sales/${idSale}`);
-  }
+  };
 
   return (
     <button
       type="button"
-      onClick={ () => { detailOrder(id) }}
+      onClick={ () => { detailOrder(id); } }
     >
 
       <div>
@@ -38,36 +39,48 @@ export default function cardMyRequests({ orders }) {
         </p>
       </div>
 
-        <div
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
+      <div
+        data-testid={ `customer_orders__element-delivery-status-${id}` }
+      >
+        <p>{status}</p>
+      </div>
+
+      <div>
+        <p
+          data-testid={ `customer_orders__element-order-date-${id}` }
         >
-          <p>{status}</p>
-        </div>
+          {dateFormat}
+        </p>
+        <p
+          data-testid={ `customer_orders__element-card-price-${id}` }
+        >
+          {totalPrice.replace('.', ',')}
+        </p>
+      </div>
 
-        <div>
-          <p
-            data-testid={ `customer_orders__element-order-date-${id}` }
-          >
-            {dateFormat}
-          </p>
-          <p
-            data-testid={ `customer_orders__element-card-price-${id}` }
-          >
-            {totalPrice.replace('.', ',')}
-          </p>
-        </div>
-
-        <div>
-          <h1>
-            {role === 'seller'
-              ? (
-                <p data-testid={ `${ADRESS_SELLER}${id}` }>
-                  {deliveryAdress}
-                </p>
-              )
-              : null}
-          </h1>
-        </div>
+      <div>
+        <h1>
+          {role === 'seller'
+            ? (
+              <p data-testid={ `${ADRESS_SELLER}${id}` }>
+                {deliveryAdress}
+              </p>
+            )
+            : null}
+        </h1>
+      </div>
     </button>
-  )
+  );
 }
+
+CardMyRequests.propTypes = {
+  orders: PropTypes.shape({
+    id: PropTypes.number,
+    saleDate: PropTypes.instanceOf(Date),
+    status: PropTypes.string,
+    totalPrice: PropTypes.number,
+    deliveryAdress: PropTypes.string,
+  }).isRequired,
+};
+
+export default CardMyRequests;
