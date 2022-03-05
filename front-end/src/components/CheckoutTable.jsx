@@ -41,7 +41,13 @@ function CheckoutTable() {
         <tbody>
           { chosenProduct.map((prod, index) => (
             <tr key={ prod.id }>
-              <td>{ index + 1 }</td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${index}`
+                }
+              >
+                { index + 1 }
+              </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-name-${index}`
