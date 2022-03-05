@@ -17,11 +17,15 @@ export const chosenProductsSlice = createSlice({
       ];
       const validProducts = state.chosenProducts.filter((prod) => prod.quantity > 0);
       state.chosenProducts = [...validProducts];
-      console.log(state.chosenProducts);
+    },
+    removeProduct: (state, action) => {
+      const Products = state.chosenProducts
+        .filter((prod) => prod.id !== action.payload);
+      state.chosenProducts = [...Products];
     },
   },
 });
 
-export const { addProduct, remove } = chosenProductsSlice.actions;
+export const { addProduct, removeProduct } = chosenProductsSlice.actions;
 
 export default chosenProductsSlice.reducer;
