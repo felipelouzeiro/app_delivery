@@ -85,12 +85,7 @@ function CheckoutTable() {
           ))}
         </tbody>
       </table>
-      <h3
-        type="button"
-        /* onClick={ checkout } */
-        /* disabled={ buttonCart } */
-        /* data-testid="customer_products__button-cart" */
-      >
+      <h3>
         Total: R$
         <span
           data-testid="customer_checkout__element-order-total-price"
