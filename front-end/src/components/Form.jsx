@@ -19,6 +19,12 @@ export default function Form() {
     password: yup.string().min(MIN_PASSWORD).required(),
   });
 
+  const loginRole = (data) => {
+    localStorage.setItem('user', JSON.stringify(data));
+    if (data.role === 'customer') history.push('/customer/products');
+    else history.push('/seller/orders');
+  };
+
   useEffect(() => {
     schema.isValid({ login, password })
       .then((valid) => {
@@ -33,8 +39,7 @@ export default function Form() {
     if (!response) setErrorDisabled(true);
     else {
       const { data } = response;
-      localStorage.setItem('user', JSON.stringify(data));
-      history.push('/customer/products');
+      loginRole(data);
     }
   };
 
