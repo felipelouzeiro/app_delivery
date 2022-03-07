@@ -10,6 +10,7 @@ export default function RegisterForm() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     registerSchema.isValid({ name, email, password })
