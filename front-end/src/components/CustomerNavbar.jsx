@@ -18,7 +18,10 @@ export function CustomerNavbar() {
   return (
     <nav>
       { !userData.name ? <h1>Loading</h1> : (
-        <div className="customer-navbar-container">
+        <div
+          style={ { display: 'flex', flexFlow: 'row' } }
+          className="customer-navbar-container"
+        >
           <p
             data-testid="customer_products__element-navbar-link-products"
           >
