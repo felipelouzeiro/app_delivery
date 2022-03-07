@@ -18,6 +18,12 @@ function CardMyRequests({ orders }) {
 
   const ADRESS_SELLER = 'seller_orders__element-card-address-';
 
+  const renderAdress = () => (
+    <p data-testid={ `${ADRESS_SELLER}${id}` }>
+      {deliveryAdress}
+    </p>
+  );
+
   const detailOrder = (idSale) => {
     history.push(`/sales/${idSale}`);
   };
@@ -58,7 +64,9 @@ function CardMyRequests({ orders }) {
         </p>
       </div>
 
-      <div>
+      {role === 'seller' && renderAdress()}
+
+      {/* <div>
         <h1>
           {role === 'seller'
             ? (
@@ -68,7 +76,7 @@ function CardMyRequests({ orders }) {
             )
             : null}
         </h1>
-      </div>
+      </div> */}
     </button>
   );
 }
