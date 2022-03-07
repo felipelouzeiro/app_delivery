@@ -19,11 +19,13 @@ export function CustomerNavbar() {
     <nav>
       { !userData.name ? <h1>Loading</h1> : (
         <div className="customer-navbar-container">
-          <p
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </p>
+          <Link to="/customer/products">
+            <p
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              Produtos
+            </p>
+          </Link>
           <Link to="/customer/orders">
             <p
               data-testid="customer_products__element-navbar-link-orders"
