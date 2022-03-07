@@ -6,9 +6,9 @@ const register = async (req, res, next) => {
     const { id: userId } = req.user;
     const salesInfo = req.body;
 
-    await saleService.createSale(salesInfo, userId);
+    const saleId = await saleService.createSale(salesInfo, userId);
     
-    return res.status(created).json({ message: 'registered sale' });
+    return res.status(created).json({ message: 'registered sale', id: saleId });
   } catch (error) {
     console.log(`Create Sale -> ${error.message}`);
     next(error);

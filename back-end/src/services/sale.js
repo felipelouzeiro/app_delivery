@@ -20,7 +20,7 @@ const createSale = async (salesInfo, userId) => {
 
   await Promise.all(saleProductRequest);
 
-  return true;
+  return saleId;
 };
 
 const getAll = async (userId) => {
