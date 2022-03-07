@@ -8,13 +8,8 @@ function CheckoutAddress() {
   const [filterSellers, setFilterSellers] = useState([]);
   const [address, setAdress] = useState('');
   const [number, setNumber] = useState('');
-  const [seller, setSeller] = useState('Fulana Pereira');
+  const [seller, setSeller] = useState(0);
   const history = useHistory();
-
-  const getSellerId = (personSeller) => {
-    const sellerId = filterSellers.find((userSeller) => userSeller.name === personSeller);
-    return sellerId.id;
-  };
 
   const saleProducts = () => {
     const products = [];
@@ -40,10 +35,9 @@ function CheckoutAddress() {
     e.preventDefault();
     const totalPrice = sumTotal();
     const products = saleProducts();
-    const sellerId = getSellerId(seller);
 
     const salesData = {
-      sellerId,
+      sellerId: seller,
       totalPrice,
       deliveryAddress: address,
       deliveryNumber: number,
@@ -52,7 +46,7 @@ function CheckoutAddress() {
     console.log(salesData);
     const { data } = await postSales(salesData);
     console.log(data);
-    history.push(`/orders/${data.id}`);
+    history.push(`./orders/${data.id}`);
   };
 
   useEffect(() => {
@@ -61,6 +55,10 @@ function CheckoutAddress() {
         .filter((client) => client.role === 'seller')));
   }, []);
 
+  useEffect(() => {
+    if (filterSellers.length > 0) setSeller(filterSellers[0].id);
+  }, [filterSellers]);
+
   return (
     <div className="product-page">
       { console.log(seller) }
@@ -68,6 +66,7 @@ function CheckoutAddress() {
         P. Vendedora Responsável
         <select
           required
+          value={ seller }
           name="sellers"
           data-testid="customer_checkout__select-seller"
           onChange={ (event) => setSeller(event.target.value) }
@@ -77,6 +76,7 @@ function CheckoutAddress() {
               .map((userSeller, index) => (
                 <option
                   key={ index }
+                  value={ userSeller.id }
                 >
                   { userSeller.name }
                 </option>))
