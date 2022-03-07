@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 export function CustomerNavbar() {
   const [userData, setUserData] = useState({});
@@ -19,16 +19,20 @@ export function CustomerNavbar() {
     <nav>
       { !userData.name ? <h1>Loading</h1> : (
         <div className="customer-navbar-container">
-          <p
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </p>
-          <p
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            Meus Pedidos
-          </p>
+          <Link to="/customer/products">
+            <p
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              Produtos
+            </p>
+          </Link>
+          <Link to="/customer/orders">
+            <p
+              data-testid="customer_products__element-navbar-link-orders"
+            >
+              Meus Pedidos
+            </p>
+          </Link>
           <div className="customer-name-container">
             <p
               data-testid="customer_products__element-navbar-user-full-name"

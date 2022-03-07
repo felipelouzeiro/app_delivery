@@ -4,8 +4,10 @@ import './App.css';
 import Product from './pages/Products';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Orders from './pages/MyRequests';
 import Checkout from './pages/Checkout';
 import SellerOrders from './pages/SellerOrders';
+import OrdersDetails from './pages/OrdersDetails';
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
         <Register />
       </Route>
       <Route exact path="/customer/products" component={ Product } />
+      <Route exact path="/customer/orders" component={ Orders } />
       <Route exact path="/customer/checkout" component={ Checkout } />
       <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
     </Switch>
   );
 }

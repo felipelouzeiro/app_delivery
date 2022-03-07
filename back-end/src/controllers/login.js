@@ -9,6 +9,7 @@ const loginController = async (req, res, next) => {
 
     return res.status(success).json(response);
   } catch (error) {
+    console.log(`Login -> ${error.message}`);
     next(error);
   }
 };
