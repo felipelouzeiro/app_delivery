@@ -22,11 +22,14 @@ export function CustomerNavbar() {
           style={ { display: 'flex', flexFlow: 'row' } }
           className="customer-navbar-container"
         >
-          <p
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </p>
+          <Link to="/customer/products">
+
+            <p
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              Produtos
+            </p>
+          </Link>
           <Link to="/customer/orders">
             <p
               data-testid="customer_products__element-navbar-link-orders"
