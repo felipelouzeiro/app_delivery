@@ -5,11 +5,11 @@ import NavBar from '../components/CustomerNavbar';
 import CardMyRequests from '../components/CardMyRequests';
 
 export default function MyRequests() {
-  const [ordersCustomer, setOrdersCustomer] = useState();
+  const [ordersCustomer, setOrdersCustomer] = useState([]);
 
   useEffect(() => {
     getAllOrders()
-      .then((orders) => setOrdersCustomer(orders));
+      .then(({ sales }) => setOrdersCustomer(sales));
   }, []);
 
   // socket.on('', async () => getRequests());
@@ -17,14 +17,14 @@ export default function MyRequests() {
   return (
     <div>
       <NavBar />
-      <div>
-        {ordersCustomer.map((order) => (
+      {ordersCustomer.length && (
+        ordersCustomer.map((order) => (
           <CardMyRequests
             key={ order.id }
             orders={ order }
           />
-        ))}
-      </div>
+        ))
+      )}
     </div>
   );
 }

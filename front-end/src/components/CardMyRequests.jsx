@@ -24,14 +24,14 @@ function CardMyRequests({ orders }) {
     </p>
   );
 
-  const detailOrder = (idSale) => {
-    history.push(`/sales/${idSale}`);
+  const goToDetails = (idSale) => {
+    history.push(`/customer/orders/${idSale}`);
   };
 
   return (
     <button
       type="button"
-      onClick={ () => { detailOrder(id); } }
+      onClick={ () => { goToDetails(id); } }
     >
 
       <div>
@@ -65,18 +65,6 @@ function CardMyRequests({ orders }) {
       </div>
 
       {role === 'seller' && renderAdress()}
-
-      {/* <div>
-        <h1>
-          {role === 'seller'
-            ? (
-              <p data-testid={ `${ADRESS_SELLER}${id}` }>
-                {deliveryAdress}
-              </p>
-            )
-            : null}
-        </h1>
-      </div> */}
     </button>
   );
 }

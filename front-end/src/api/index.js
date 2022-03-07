@@ -13,6 +13,7 @@ export const getAllOrders = async () => {
         authorization: token,
       },
     });
+
     return data;
   } catch (error) {
     console.log(error.message);
