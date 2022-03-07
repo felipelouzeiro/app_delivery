@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getAllOrders } from '../api';
+import SaleHeader from './SaleHeader';
 
 function DetailsTable() {
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const [total, setTotal] = useState(0);
+  const [userOrder, setUserOrder] = useState({});
 
   const totalPriceEachProduct = (quantity, price) => {
     const unitPrice = (quantity * price).toFixed(2).replace('.', ',');
     return unitPrice;
   };
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    const order = getAllOrders()
+      .then(({ sales }) => sales.filter((sale) => sale.id === id));
+    setUserOrder(order);
+  }, [id]);
+  console.log();
   useEffect(() => {
     let sum = 0;
     chosenProduct.forEach((prod) => {
@@ -18,30 +30,14 @@ function DetailsTable() {
     return setTotal(sum);
   }, [chosenProduct]);
 
-  const dataTestidBase = 'seller_order_details__element-order-details-label';
-
   return (
     <div className="checkout-table">
       <h3>Detalhes do pedido</h3>
       <table>
-        <thead>
-          <tr>
-            <th data-test={ `${dataTestidBase}-order-id` }>
-              Pedido
+        {
+          userOrder.id && <SaleHeader order={ userOrder } />
+        }
 
-            </th>
-            <th>Vendedor</th>
-            <th data-testid={ `${dataTestidBase}-order-date` }>
-              Data
-
-            </th>
-            <th data-testid={ `${dataTestidBase}-delivery-status` }>
-              Status
-
-            </th>
-            <th>Marcar como entregue</th>
-          </tr>
-        </thead>
         <thead>
           <tr>
             <th>Item</th>
