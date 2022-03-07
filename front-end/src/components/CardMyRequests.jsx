@@ -74,7 +74,7 @@ CardMyRequests.propTypes = {
     id: PropTypes.number,
     saleDate: PropTypes.instanceOf(Date),
     status: PropTypes.string,
-    totalPrice: PropTypes.number,
+    totalPrice: PropTypes.string,
     deliveryAdress: PropTypes.string,
   }).isRequired,
 };
