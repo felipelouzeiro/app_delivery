@@ -4,6 +4,7 @@ import './App.css';
 import Product from './pages/Products';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Register />
       </Route>
       <Route exact path="/customer/products" component={ Product } />
+      <Route exact path="/customer/checkout" component={ Checkout } />
     </Switch>
   );
 }
