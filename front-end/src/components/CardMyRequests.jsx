@@ -72,7 +72,7 @@ function CardMyRequests({ orders }) {
 CardMyRequests.propTypes = {
   orders: PropTypes.shape({
     id: PropTypes.number,
-    saleDate: PropTypes.instanceOf(Date),
+    saleDate: PropTypes.string,
     status: PropTypes.string,
     totalPrice: PropTypes.string,
     deliveryAdress: PropTypes.string,
