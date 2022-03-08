@@ -23,9 +23,9 @@ const createSale = async (salesInfo, userId) => {
   return saleId;
 };
 
-const getAll = async (userId) => {
-  const sales = await sale.findAll({ where: { userId } });
-  return sales;
+const getAll = async (id, role) => {
+  if (role === 'customer') return sale.findAll({ where: { userId: id } });
+  return sale.findAll({ where: { sellerId: id } });
 };
 
 module.exports = {
