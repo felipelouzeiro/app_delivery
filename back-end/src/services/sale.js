@@ -16,7 +16,7 @@ const createSale = async (salesInfo, userId) => {
   const { id: saleId } = dataValues;
 
   const saleProductRequest = products
-    .map(async ({ productId, quantity }) => saleProduct.create({ saleId, productId, quantity }));  
+    .map(async ({ productId, quantity }) => saleProduct.create({ saleId, productId, quantity }));
 
   await Promise.all(saleProductRequest);
 
@@ -30,8 +30,8 @@ const getAll = async (id, role) => {
 
 const getWithProducts = async (id) => {
   const foundSaleWithProducts = await sale.findOne({
-     where: { id },
-    include: [{ model: product, as: 'products', through: { attributes: [] } }],
+    where: { id },
+    include: [{ model: product, as: 'products', through: { attributes: ['quantity'] } }],
   });
 
   if (!foundSaleWithProducts) throw errorConstructor(notFound, 'sale not found');
