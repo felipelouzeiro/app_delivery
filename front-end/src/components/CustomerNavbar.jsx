@@ -20,6 +20,7 @@ export function CustomerNavbar() {
       { userData.role === 'customer' && (
         <>
           <Link to="/customer/products">
+
             <p
               data-testid="customer_products__element-navbar-link-products"
             >
