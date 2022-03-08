@@ -81,6 +81,7 @@ function SaleHeader({ order }) {
             type="button"
             data-testid="customer_order_details__button-delivery-check"
             disabled={ deliveryCheck }
+            onClick={ () => updateOrder('Entregue') }
           >
             Marcar como entregue
           </button>
