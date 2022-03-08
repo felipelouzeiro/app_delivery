@@ -27,7 +27,20 @@ const getAll = async (req, res, next) => {
   }
 };
 
+const getWithProducts = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const sale = await saleService.getWithProducts(id);
+
+    return res.status(success).json({ sale });
+  } catch (error) {
+    console.log(`Get Sale With Products -> ${error.message}`);
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   getAll,
+  getWithProducts,
 };

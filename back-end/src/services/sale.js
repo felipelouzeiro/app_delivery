@@ -1,5 +1,5 @@
-const { sale, saleProduct } = require('../database/models');
-const { badRequest } = require('../utils/dictionary');
+const { sale, saleProduct, product } = require('../database/models');
+const { badRequest, notFound } = require('../utils/dictionary');
 const errorConstructor = require('../utils/errorConstructor');
 const { salesSchema } = require('../utils/joiSchemas');
 
@@ -28,7 +28,19 @@ const getAll = async (id, role) => {
   return sale.findAll({ where: { sellerId: id } });
 };
 
+const getWithProducts = async (id) => {
+  const foundSaleWithProducts = await sale.findOne({
+     where: { id },
+    include: [{ model: product, as: 'products', through: { attributes: [] } }],
+  });
+
+  if (!foundSaleWithProducts) throw errorConstructor(notFound, 'sale not found');
+
+  return foundSaleWithProducts;
+};
+
 module.exports = {
   createSale,
   getAll,
+  getWithProducts,
 };
