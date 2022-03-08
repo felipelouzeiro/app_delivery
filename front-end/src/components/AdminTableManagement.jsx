@@ -1,53 +1,53 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+// import { getUsers } from '../api/index';
 
-function AdminTableManagement() {
-  const [disable, setDisable] = useState(true);
-  const [role, setRole] = useState('seller');
+// function AdminTableManagement() {
+//   const [allUsers, setAllUsers] = useState([]);
 
+//   useEffect(() => {
+//     const users = getUsers();
+//     setAllUsers(users);
+//   });
 
-  return (
-    <form action="">
-      <input
-        data-testid="admin_manage__input-name"
-        type="text"
-        name="name"
-        id="name"
-        placeholder="Nome e Sobrenome"
-        onChange={ console.log() }
-      />
-      <input
-        data-testid="admin_manage__input-email"
-        type="email"
-        name="email"
-        id="email"
-        placeholder="seu-email@site.com.br"
-        onChange={ console.log() }
-      />
-      <input
-        data-testid="admin_manage__input-password"
-        type="password"
-        name="password"
-        id="password"
-        placeholder="*********"
-        onChange={ console.log() }
-      />
-      <select
-        name="role"
-        id="role"
-        onChange={ console.log() }
-      >
-        <option value="seller">Vendedor</option>
-        <option value="customer">Cliente</option>
-      </select>
-      <button
-        data-testid="admin_manage__button-register"
-        type="button"
-        onClick={ console.log() }
-      >
-        Cadastrar
-      </button>
-    </form>
-  );
-}
+//   return (
+//     <>
+//     { allUsers.map(({ id, name, email, role }, index) => (
+//       <div>
+//         <ul>
+//           <li key={ index }>
+//             <h3
+//               data-testid={ `admin_manage__element-user-table-item-number-${id}` }
+//             >
+//               { index + 1 }
+//             </h3>
+//             <h3
+//               data-testid={ `admin_manage__element-user-table-name-${id}` }
+//             >
+//               { name }
+//             </h3>
+//             <h3
+//               data-testid={ `admin_manage__element-user-table-email-${id}` }
+//             >
+//               { email }
+//             </h3>
+//             <h3
+//               data-testid={ `admin_manage__element-user-table-role-${id}` }
+//             >
+//               { role }
+//             </h3>
+//             <button
+//               onClick={}
+//               type="button"
+//               data-testid={ `admin_manage__element-user-table-remove-${id}` }
+//             >
+//               Excluir
+//             </button>
+//           </li>
+//         </ul>
+//       </div>
+//     ))}
+//     </>
+//   );
+// }
 
-export default AdminTableManagement;
+// export default AdminTableManagement;
