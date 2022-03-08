@@ -62,7 +62,6 @@ function CardSellerSales({ orders }) {
           {totalPrice.replace('.', ',')}
         </p>
       </div>
-      { console.log(role) }
       { role === 'seller' && renderAdress() }
     </button>
   );
