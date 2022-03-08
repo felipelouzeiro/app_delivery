@@ -8,6 +8,8 @@ export default function Login() {
   return (
     <>
       {user && user.role === 'customer' && <Redirect to="/customer/products" />}
+      {user && user.role === 'seller' && <Redirect to="/seller/orders" />}
+      {user && user.role === 'administrator' && <Redirect to="/admin/manage" />}
       <main>
         <img src={ beerGif } alt="beer gif" width="100px" />
         <h1>José Delivery</h1>
