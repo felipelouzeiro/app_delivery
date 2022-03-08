@@ -65,6 +65,7 @@ export const register = async (data) => {
     name: data.name,
     email: data.email,
     password: data.password,
+    role: data.role ? data.role : 'customer',
   };
 
   try {
