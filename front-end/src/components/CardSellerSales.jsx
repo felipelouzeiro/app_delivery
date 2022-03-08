@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import socket from '../utils/socketClient';
 
 function CardSellerSales({ orders }) {
   const history = useHistory();
@@ -9,6 +10,8 @@ function CardSellerSales({ orders }) {
 
   const { id, saleDate, status, totalPrice, deliveryAddress } = orders;
 
+  const [currentStatus, setCurrentStatus] = useState(status);
+
   const newDate = new Date(saleDate);
   const day = newDate.getDate().toString().padStart(2, '0');
   const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
@@ -16,6 +19,12 @@ function CardSellerSales({ orders }) {
   const dateFormat = `${day}/${month}/${year}`;
 
   const ADRESS_SELLER = 'seller_orders__element-card-address-';
+
+  useEffect(() => {
+    socket.on('refreshStatus', ({ saleId, status: newStatus }) => {
+      if (saleId === id) setCurrentStatus(newStatus);
+    });
+  }, [id]);
 
   const renderAdress = () => (
     <p data-testid={ `${ADRESS_SELLER}${id}` }>
@@ -47,7 +56,7 @@ function CardSellerSales({ orders }) {
       <div
         data-testid={ `seller_orders__element-delivery-status-${id}` }
       >
-        <p>{status}</p>
+        <p>{currentStatus}</p>
       </div>
 
       <div>
