@@ -40,7 +40,7 @@ export function CustomerNavbar() {
           <p
             data-testid="customer_products__element-navbar-link-orders"
           >
-            Meus Pedidos
+            Pedidos
           </p>
         </Link>
       ) }
