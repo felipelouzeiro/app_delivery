@@ -43,7 +43,6 @@ function CheckoutAddress() {
       deliveryNumber: number,
       products,
     };
-    console.log(salesData);
     const { data } = await postSales(salesData);
     history.push(`./orders/${data.id}`);
   };
