@@ -17,8 +17,8 @@ const register = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const { id: userId } = req.user;
-    const sales = await saleService.getAll(userId);
+    const { id, role } = req.user;
+    const sales = await saleService.getAll(id, role);
 
     return res.status(success).json({ sales });
   } catch (error) {
