@@ -22,7 +22,8 @@ export default function Form() {
   const loginRole = (data) => {
     localStorage.setItem('user', JSON.stringify(data));
     if (data.role === 'customer') history.push('/customer/products');
-    else history.push('/seller/orders');
+    else if (data.role === 'seller') history.push('/seller/orders');
+    else history.push('/admin/manage');
   };
 
   useEffect(() => {
