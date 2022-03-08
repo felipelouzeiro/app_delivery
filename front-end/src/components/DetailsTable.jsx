@@ -7,7 +7,7 @@ import SaleHeader from './SaleHeader';
 function DetailsTable() {
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const [total, setTotal] = useState(0);
-  const [userOrder, setUserOrder] = useState({});
+  const [userOrder, setUserOrder] = useState([]);
 
   const totalPriceEachProduct = (quantity, price) => {
     const unitPrice = (quantity * price).toFixed(2).replace('.', ',');
@@ -17,11 +17,10 @@ function DetailsTable() {
   const { id } = useParams();
 
   useEffect(() => {
-    const order = getAllOrders()
-      .then(({ sales }) => sales.filter((sale) => sale.id === id));
-    setUserOrder(order);
+    getAllOrders()
+      .then(({ sales }) => setUserOrder(sales.filter((sale) => sale.id === Number(id))));
   }, [id]);
-  console.log();
+
   useEffect(() => {
     let sum = 0;
     chosenProduct.forEach((prod) => {
@@ -33,11 +32,10 @@ function DetailsTable() {
   return (
     <div className="checkout-table">
       <h3>Detalhes do pedido</h3>
+      {
+        userOrder.length && <SaleHeader order={ userOrder } />
+      }
       <table>
-        {
-          userOrder.id && <SaleHeader order={ userOrder } />
-        }
-
         <thead>
           <tr>
             <th>Item</th>
@@ -92,7 +90,7 @@ function DetailsTable() {
       <h3>
         Total: R$
         <span
-          data-testid="customer_checkout__element-order-total-price"
+          data-testid="customer_order_details__element-order-total-price"
         >
           {total.toFixed(2).replace('.', ',')}
         </span>
