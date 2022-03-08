@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getAllOrders } from '../api';
+import { getAllOrders, getOrderWithProducts } from '../api';
+import productFormater from '../utils/productFormater';
 import SaleHeader from './SaleHeader';
 
 function DetailsTable() {
-  const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
+  const [chosenProduct, setChosenProduct] = useState([]);
   const [total, setTotal] = useState(0);
   const [userOrder, setUserOrder] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const totalPriceEachProduct = (quantity, price) => {
     const unitPrice = (quantity * price).toFixed(2).replace('.', ',');
@@ -15,6 +16,19 @@ function DetailsTable() {
   };
 
   const { id } = useParams();
+
+  useEffect(() => {
+    getOrderWithProducts(id)
+      .then(({ sale: { products } }) => {
+        const formatedProducts = products.map((product) => productFormater(product));
+        setChosenProduct(formatedProducts);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUserData(user);
+  }, []);
 
   useEffect(() => {
     getAllOrders()
@@ -46,7 +60,7 @@ function DetailsTable() {
           </tr>
         </thead>
         <tbody>
-          {chosenProduct.map((prod, index) => (
+          {userData.role && chosenProduct.length && chosenProduct.map((prod, index) => (
             <tr key={ prod.id }>
               <td
                 data-testid={
@@ -87,14 +101,16 @@ function DetailsTable() {
           ))}
         </tbody>
       </table>
-      <h3>
-        Total: R$
-        <span
-          data-testid="customer_order_details__element-order-total-price"
-        >
-          {total.toFixed(2).replace('.', ',')}
-        </span>
-      </h3>
+      {userData.role && (
+        <h3>
+          Total: R$
+          <span
+            data-testid={ `${userData.role}_order_details__element-order-total-price` }
+          >
+            {total.toFixed(2).replace('.', ',')}
+          </span>
+        </h3>
+      )}
     </div>
   );
 }
