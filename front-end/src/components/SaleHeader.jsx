@@ -61,7 +61,7 @@ function SaleHeader({ order }) {
   const dataTestidCustomerBase = 'customer_order_details__element-order-details-label';
   const dataTestidSellerBase = 'seller_order_details__element-order-details-label';
 
-  const useHeader = () => (
+  return (
     <div className="details-heading">
       {userData.role === 'customer' && (
         <>
@@ -116,30 +116,6 @@ function SaleHeader({ order }) {
         </>
       )}
     </div>
-  );
-  return (
-    useHeader()
-    // <div className="details-heading">
-    //   <p data-testid={ `${dataTestidCustomerBase}-order-id` }>
-    //     {id}
-    //   </p>
-    //   <p data-testid={ `${dataTestidCustomerBase}-seller-name` }>
-    //     {sellerName}
-    //   </p>
-    //   <p data-testid={ `${dataTestidCustomerBase}-order-date` }>
-    //     {orderdate}
-    //   </p>
-    //   <p data-testid={ `${dataTestidCustomerBase}-delivery-status` }>
-    //     {status}
-    //   </p>
-    //   <button
-    //     type="button"
-    //     data-testid="customer_order_details__button-delivery-check"
-    //     disabled={ deliveryCheck }
-    //   >
-    //     Marcar como entregue
-    //   </button>
-    // </div>
   );
 }
 
