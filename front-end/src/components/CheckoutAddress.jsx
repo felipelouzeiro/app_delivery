@@ -45,7 +45,6 @@ function CheckoutAddress() {
     };
     console.log(salesData);
     const { data } = await postSales(salesData);
-    console.log(data);
     history.push(`./orders/${data.id}`);
   };
 
@@ -61,7 +60,6 @@ function CheckoutAddress() {
 
   return (
     <div className="product-page">
-      { console.log(seller) }
       <label htmlFor="sellers">
         P. Vendedora Responsável
         <select
