@@ -34,7 +34,7 @@ function AdminForm() {
 
   const renderError = () => (
     <p data-testid="admin_manage__element-invalid-register">
-      Login e/ou senha inválidos
+      Email já cadastrado!!!
     </p>
   );
 
@@ -43,6 +43,7 @@ function AdminForm() {
     const body = { name, email, password, role };
     const response = await createUser(body);
     if (!response) setErrorDisabled(true);
+    else setErrorDisabled(false);
     dispatch(addUser(body));
   };
 
@@ -73,6 +74,7 @@ function AdminForm() {
         onChange={ ({ target }) => setPassword(target.value) }
       />
       <select
+        data-testid="admin_manage__select-role"
         name="role"
         id="role"
         onChange={ ({ target }) => setRole(target.value) }
