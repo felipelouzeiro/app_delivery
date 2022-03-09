@@ -57,7 +57,7 @@ function AdminTableManagement() {
               <td>
                 <button
                   type="button"
-                  data-testid={ `admin_manage__element-user-table-remove-${id}` }
+                  data-testid={ `admin_manage__element-user-table-remove-${index}` }
                   onClick={ () => removeUserById(id) }
                 >
                   Excluir
