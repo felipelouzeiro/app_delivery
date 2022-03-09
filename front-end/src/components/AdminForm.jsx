@@ -1,34 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { register } from '../api/index';
+import { useDispatch } from 'react-redux';
+import * as yup from 'yup';
+import { createUser } from '../api';
+import { addUser } from '../redux/slices/userSlice';
 
 function AdminForm() {
   const [buttonOn, setButtonOn] = useState(true);
+  const [errorDisabled, setErrorDisabled] = useState(false);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('seller');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const MIN_NAME = 12;
   const MIN_PASSWORD = 6;
 
-  useEffect(() => {
-    const isValidEmail = regex.test(email);
-    const isValidName = name.length >= MIN_NAME;
-    const isValidPassword = password.length >= MIN_PASSWORD;
-    if (isValidEmail && isValidName && isValidPassword) {
-      return setButtonOn(false);
-    }
+  const schemaCreateUser = yup.object({
+    name: yup.string().min(MIN_NAME).required(),
+    email: yup.string().email().required(),
+    password: yup.string().min(MIN_PASSWORD).required(),
+    role: yup.string().required(),
   });
 
-  const registerUser = async () => {
+  useEffect(() => {
+    schemaCreateUser.isValid({ name, email, password, role })
+      .then((valid) => {
+        if (valid) setButtonOn(false);
+        else setButtonOn(true);
+      });
+  }, [email, name, password, role, schemaCreateUser]);
+
+  const renderError = () => (
+    <p data-testid="admin_manage__element-invalid-register">
+      Login e/ou senha inválidos
+    </p>
+  );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const body = { name, email, password, role };
-    register(body);
+    const response = await createUser(body);
+    if (!response) setErrorDisabled(true);
+    dispatch(addUser(body));
   };
 
   return (
-    <form action="">
+    <form onSubmit={ handleSubmit }>
       <input
         data-testid="admin_manage__input-name"
         type="text"
@@ -63,14 +82,14 @@ function AdminForm() {
       </select>
       <button
         data-testid="admin_manage__button-register"
-        type="button"
+        type="submit"
         disabled={ buttonOn }
-        onClick={ () => registerUser() }
       >
         Cadastrar
       </button>
+      {errorDisabled && renderError()}
     </form>
   );
 }
 
-export default AdminForm();
+export default AdminForm;
