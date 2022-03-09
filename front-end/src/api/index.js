@@ -47,8 +47,12 @@ export const createUser = async (userPayload) => {
   const headers = {
     authorization: token,
   };
-  const users = await axios.post(`${BASE_URL}/user`, userPayload, { headers });
-  return users;
+  try {
+    const response = await axios.post(`${BASE_URL}/user`, userPayload, { headers });
+    return response;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const deleteUser = async (id) => {
