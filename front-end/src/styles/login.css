@@ -72,7 +72,7 @@ label > input {
 
 .form-button-login:disabled {
   background-color: #797979;
-  cursor: pointer;
+  cursor: auto;
 }
 
 .form-button-register {

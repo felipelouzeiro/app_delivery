@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { getProducts } from '../api';
 import { ProductCard } from './ProductCard';
 
+import '../styles/productCard.css';
+
 export function ListProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -47,6 +49,7 @@ export function ListProducts() {
       </div>
       <button
         type="button"
+        className="product-checkout-button"
         onClick={ checkout }
         disabled={ buttonCart }
         data-testid="customer_products__button-cart"
