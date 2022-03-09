@@ -32,52 +32,50 @@ export default function RegisterForm() {
   };
 
   return (
-    <section>
-      <form onSubmit={ handleSubmit }>
-        <label htmlFor="nome">
-          Nome
-          <input
-            onChange={ ({ target }) => setName(target.value) }
-            value={ name }
-            placeholder="Seu nome"
-            id="nome"
-            type="text"
-            data-testid="common_register__input-name"
-          />
-        </label>
+    <form className="form-container" onSubmit={ handleSubmit }>
+      <label htmlFor="nome">
+        Nome
+        <input
+          onChange={ ({ target }) => setName(target.value) }
+          value={ name }
+          placeholder="Seu nome"
+          id="nome"
+          type="text"
+          data-testid="common_register__input-name"
+        />
+      </label>
 
-        <label htmlFor="email">
-          Email
-          <input
-            onChange={ ({ target }) => setEmail(target.value) }
-            value={ email }
-            placeholder="seu-email@site.com.br"
-            id="email"
-            type="text"
-            data-testid="common_register__input-email"
-          />
-        </label>
+      <label htmlFor="email">
+        Email
+        <input
+          onChange={ ({ target }) => setEmail(target.value) }
+          value={ email }
+          placeholder="seu-email@site.com.br"
+          id="email"
+          type="text"
+          data-testid="common_register__input-email"
+        />
+      </label>
 
-        <label htmlFor="password">
-          Senha
-          <input
-            onChange={ ({ target }) => setPassword(target.value) }
-            value={ password }
-            placeholder="**********"
-            id="password"
-            type="password"
-            data-testid="common_register__input-password"
-          />
-        </label>
+      <label htmlFor="password">
+        Senha
+        <input
+          onChange={ ({ target }) => setPassword(target.value) }
+          value={ password }
+          placeholder="**********"
+          id="password"
+          type="password"
+          data-testid="common_register__input-password"
+        />
+      </label>
 
-        <button
-          data-testid="common_register__button-register"
-          type="submit"
-          disabled={ formDisable }
-        >
-          CADASTRAR
-        </button>
-      </form>
+      <button
+        data-testid="common_register__button-register"
+        type="submit"
+        disabled={ formDisable }
+      >
+        CADASTRAR
+      </button>
       {
         errorDisabled && (
           <p data-testid="common_register__element-invalid_register">
@@ -85,6 +83,6 @@ export default function RegisterForm() {
           </p>
         )
       }
-    </section>
+    </form>
   );
 }
