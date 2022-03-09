@@ -1,4 +1,4 @@
-const { success } = require('../utils/dictionary');
+const { success, created } = require('../utils/dictionary');
 const { getUserService } = require('../services/user');
 const { createUserService } = require('../services/user');
 const { deleteUserService } = require('../services/user');
@@ -18,9 +18,9 @@ const createUserController = async (req, res, next) => {
     const newUser = req.body;
     const { role } = req.user;
     
-    const users = await createUserService(newUser, role);
+    const user = await createUserService(newUser, role);
 
-    return res.status(success).json(users);
+    return res.status(created).json(user);
   } catch (error) {
     next(error);
   }
