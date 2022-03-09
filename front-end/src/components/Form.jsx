@@ -51,34 +51,35 @@ export default function Form() {
   );
 
   return (
-    <section>
-      <form onSubmit={ handleSubmit }>
-        <label htmlFor="login">
-          Login
-          <input
-            value={ login }
-            onChange={ (e) => setLogin(e.target.value) }
-            id="login"
-            data-testid="common_login__input-email"
-            type="text"
-            placeholder="email@trybeer.com.br"
-          />
-        </label>
-        <label htmlFor="password">
-          Senha
-          <input
-            value={ password }
-            onChange={ (e) => setPassword(e.target.value) }
-            id="password"
-            data-testid="common_login__input-password"
-            type="password"
-            placeholder="*********"
-          />
-        </label>
+    <form className="form-container" onSubmit={ handleSubmit }>
+      <label htmlFor="login">
+        Login
+        <input
+          value={ login }
+          onChange={ (e) => setLogin(e.target.value) }
+          id="login"
+          data-testid="common_login__input-email"
+          type="text"
+          placeholder="email@trybeer.com.br"
+        />
+      </label>
+      <label htmlFor="password">
+        Senha
+        <input
+          value={ password }
+          onChange={ (e) => setPassword(e.target.value) }
+          id="password"
+          data-testid="common_login__input-password"
+          type="password"
+          placeholder="*********"
+        />
+      </label>
+      <div className="form-button-group">
         <button
           disabled={ loginDisabled }
           data-testid="common_login__button-login"
           type="submit"
+          className="form-button-login"
         >
           LOGIN
         </button>
@@ -86,12 +87,13 @@ export default function Form() {
           <button
             data-testid="common_login__button-register"
             type="button"
+            className="form-button-register"
           >
             Ainda não tenho conta
           </button>
         </Link>
-      </form>
+      </div>
       {errorDisabled && renderError()}
-    </section>
+    </form>
   );
 }
