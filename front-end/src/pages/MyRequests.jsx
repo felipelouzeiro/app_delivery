@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import socket from '../utils/socketClient';
 import { getAllOrders } from '../api';
 import NavBar from '../components/CustomerNavbar';
 import CardMyRequests from '../components/CardMyRequests';
@@ -11,8 +10,6 @@ export default function MyRequests() {
     getAllOrders()
       .then(({ sales }) => setOrdersCustomer(sales));
   }, []);
-
-  // socket.on('', async () => getRequests());
 
   return (
     <div>

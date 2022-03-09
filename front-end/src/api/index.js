@@ -20,6 +20,24 @@ export const getAllOrders = async () => {
   }
 };
 
+export const getOrderWithProducts = async (id) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  const ORDER_URL_WITH_ID = `${BASE_URL}/sales/${id}`;
+
+  try {
+    const { data } = await axios.get(ORDER_URL_WITH_ID, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const getProducts = async () => {
   const { token } = JSON.parse(localStorage.getItem('user'));
   const headers = {
@@ -47,6 +65,7 @@ export const register = async (data) => {
     name: data.name,
     email: data.email,
     password: data.password,
+    role: data.role ? data.role : 'customer',
   };
 
   try {
