@@ -42,6 +42,24 @@ export const getUsers = async () => {
   return users;
 };
 
+export const createUser = async (userPayload) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const headers = {
+    authorization: token,
+  };
+  const users = await axios.post(`${BASE_URL}/user`, userPayload, { headers });
+  return users;
+};
+
+export const deleteUser = async (id) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const headers = {
+    authorization: token,
+  };
+  const deletedUser = await axios.delete(`${BASE_URL}/user/${id}`, { headers });
+  return deletedUser;
+};
+
 export const register = async (data) => {
   const dataRegister = {
     name: data.name,
