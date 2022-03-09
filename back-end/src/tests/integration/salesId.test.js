@@ -71,7 +71,7 @@ describe('Route GET /sales/:id', () => {
     it('returns an object', async () => {
       const response = getSale;
 
-      expect(response).to.be.an('array');
+      expect(response).to.be.an('object');
     });
   })
 
@@ -232,7 +232,7 @@ describe('Route GET /sales/:id', () => {
           })
           .set('authorization', token);        
         getSale = await chai.request(app)
-          .get('/sales/6')
+          .get('/sales/9')
           .set('authorization', token);
 
       } catch (error) {
