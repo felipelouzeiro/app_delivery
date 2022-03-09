@@ -3,7 +3,7 @@ const { created } = require('../utils/dictionary');
 
 const register = async (req, res, next) => {
   try {
-    const { name, email, password, role = 'customer' } = req.body;
+    const { name, email, password, role } = req.body;
 
     const response = await registerService.registerUser(name, email, password, role);
     
