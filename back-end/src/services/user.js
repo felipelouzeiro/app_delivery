@@ -34,7 +34,17 @@ const createUserService = async (userPayload, admRole) => {
   return dataValues;
 };
 
+const deleteUserService = async (id, role) => {
+  if (role !== 'administrator') {
+    throw errorConstructor(unauthorized, 'User is not administrator'); 
+  }
+  await user.destroy({ where: { id } });
+
+  return 'User deleted';
+};
+
 module.exports = {
   getUserService,
   createUserService,
+  deleteUserService,
 };

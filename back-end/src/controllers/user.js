@@ -1,8 +1,9 @@
 const { success } = require('../utils/dictionary');
 const { getUserService } = require('../services/user');
 const { createUserService } = require('../services/user');
+const { deleteUserService } = require('../services/user');
 
-const getUserController = async (req, res, next) => {
+const getUserController = async (_req, res, next) => {
   try {
     const users = await getUserService();
 
@@ -25,7 +26,21 @@ const createUserController = async (req, res, next) => {
   }
 };
 
+const deleteUserController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.user;
+    
+    const users = await deleteUserService(id, role);
+
+    return res.status(success).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getUserController,
   createUserController,
+  deleteUserController,
 };
