@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { user } = require('../database/models');
-const { registerSchema } = require('../utils/joiSchemas');
+const { createUserSchema } = require('../utils/joiSchemas');
 const errorConstructor = require('../utils/errorConstructor');
 const { badRequest, conflict, unauthorized } = require('../utils/dictionary');
 
@@ -17,7 +17,7 @@ const getUserService = async () => {
 
 const createUserService = async (userPayload, admRole) => {
   const { name, email, password, role } = userPayload;
-  const { error } = registerSchema.validate({ name, email, password, role });
+  const { error } = createUserSchema.validate({ name, email, password, role });
   if (error) throw errorConstructor(badRequest, error.message);
 
   const emailExist = await user.findOne({ where: { email } });
