@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeProduct } from '../redux/slices/productSlice';
 
+import '../styles/checkout.css';
+
 function CheckoutTable() {
-  const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
+  const chosenProduct = JSON.parse(localStorage.getItem('cart'));
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
@@ -26,7 +28,6 @@ function CheckoutTable() {
 
   return (
     <div className="checkout-table">
-      <h1>Checkout Table</h1>
       <table>
         <thead>
           <tr>
@@ -35,13 +36,14 @@ function CheckoutTable() {
             <th>Quantidade</th>
             <th>Valor Unitário</th>
             <th>Sub-total</th>
-            <th>Remover Item</th>
+            <th>Remover</th>
           </tr>
         </thead>
         <tbody>
           { chosenProduct.map((prod, index) => (
-            <tr key={ prod.id }>
+            <tr key={ prod.id } className="table-product-row">
               <td
+                className="table-product-id"
                 data-testid={
                   `customer_checkout__element-order-table-item-number-${index}`
                 }
@@ -49,6 +51,7 @@ function CheckoutTable() {
                 { index + 1 }
               </td>
               <td
+                className="table-product-name"
                 data-testid={
                   `customer_checkout__element-order-table-name-${index}`
                 }
@@ -56,6 +59,7 @@ function CheckoutTable() {
                 { prod.name }
               </td>
               <td
+                className="table-product-quantity"
                 data-testid={
                   `customer_checkout__element-order-table-quantity-${index}`
                 }
@@ -63,28 +67,31 @@ function CheckoutTable() {
                 { prod.quantity }
               </td>
               <td
+                className="table-product-price"
                 data-testid={
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                { prod.price.replace('.', ',') }
+                { `R$ ${prod.price.replace('.', ',')}` }
               </td>
               <td
+                className="table-product-subtotal"
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                { totalPriceEachProduct(prod.quantity, prod.price) }
+                { `R$ ${totalPriceEachProduct(prod.quantity, prod.price)}` }
               </td>
               <td>
                 <button
+                  className="table-product-remove"
                   data-testid={
                     `customer_checkout__element-order-table-remove-${index}`
                   }
                   type="button"
                   onClick={ () => removeItem(prod.id) }
                 >
-                  Remover Item
+                  Remover
                 </button>
               </td>
             </tr>
