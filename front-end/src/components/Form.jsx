@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import * as yup from 'yup';
 import { postLogin } from '../api';
+import { loginSchema } from '../utils/schemas';
 
 export default function Form() {
   const [loginDisabled, setLoginDisabled] = useState(true);
@@ -12,13 +12,6 @@ export default function Form() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const MIN_PASSWORD = 6;
-
-  const schema = yup.object({
-    login: yup.string().email().required(),
-    password: yup.string().min(MIN_PASSWORD).required(),
-  });
-
   const loginRole = (data) => {
     localStorage.setItem('user', JSON.stringify(data));
     if (data.role === 'customer') history.push('/customer/products');
@@ -27,12 +20,12 @@ export default function Form() {
   };
 
   useEffect(() => {
-    schema.isValid({ login, password })
+    loginSchema.isValid({ login, password })
       .then((valid) => {
         if (valid) setLoginDisabled(false);
         else setLoginDisabled(true);
       });
-  }, [login, password, schema]);
+  }, [login, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
