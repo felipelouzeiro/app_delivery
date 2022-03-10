@@ -107,14 +107,14 @@ function CheckoutTable() {
           ))}
         </tbody>
       </table>
-      <h3>
+      <div className="checkout-table-total-price">
         Total: R$
         <span
           data-testid="customer_checkout__element-order-total-price"
         >
           { total.toFixed(2).replace('.', ',') }
         </span>
-      </h3>
+      </div>
     </div>
   );
 }
