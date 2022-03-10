@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeProduct } from '../redux/slices/productSlice';
+import { buildCart, removeProduct } from '../redux/slices/productSlice';
 
 import '../styles/checkout.css';
 
 function CheckoutTable() {
-  // const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
@@ -18,6 +17,15 @@ function CheckoutTable() {
   const removeItem = (id) => {
     dispatch(removeProduct(id));
   };
+
+  useEffect(() => {
+    const localStorageCart = JSON.parse(localStorage.getItem('cart')) || [];
+    dispatch(buildCart(localStorageCart));
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(chosenProduct));
+  }, [chosenProduct]);
 
   useEffect(() => {
     let sum = 0;
