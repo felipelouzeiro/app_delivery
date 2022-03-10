@@ -41,7 +41,6 @@ export function ProductCard(props) {
       <p
         className="product-price"
         data-testid={ `customer_products__element-card-price-${id}` }
-        /* customer_products__element-card-price-<id> */
       >
         { price.replace('.', ',') }
 
@@ -73,6 +72,7 @@ export function ProductCard(props) {
           id="count-input"
           data-testid={ `customer_products__input-card-quantity-${id}` }
           type="number"
+          min="0"
         />
       </label>
       <button
