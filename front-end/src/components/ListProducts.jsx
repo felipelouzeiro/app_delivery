@@ -15,6 +15,7 @@ export function ListProducts() {
 
   const checkout = () => {
     if (chosenProduct.length === 0) return null;
+    localStorage.setItem('cart', JSON.stringify(chosenProduct));
     history.push('/customer/checkout');
   };
 
