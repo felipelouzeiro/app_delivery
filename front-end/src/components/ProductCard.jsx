@@ -6,10 +6,12 @@ import { addProduct } from '../redux/slices/productSlice';
 export function ProductCard(props) {
   const { product } = props;
   const { id, name, urlImage, price } = product;
-  const [count, setCount] = useState(0);
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const foundProduct = cart.find((prod) => prod.id === id);
+  const [count, setCount] = useState(() => (foundProduct ? foundProduct.quantity : 0));
   const dispatch = useDispatch();
 
-  const buildCart = (quantity) => {
+  const buildProduct = (quantity) => {
     const updatedProduct = { id, name, urlImage, price, quantity };
     dispatch(addProduct(updatedProduct));
   };
@@ -17,7 +19,7 @@ export function ProductCard(props) {
   const increment = () => {
     setCount((prevCount) => {
       prevCount += 1;
-      buildCart(prevCount);
+      buildProduct(prevCount);
       return prevCount;
     });
   };
@@ -25,7 +27,7 @@ export function ProductCard(props) {
   const decrement = () => {
     setCount((prevCount) => {
       const currentCount = prevCount <= 0 ? 0 : prevCount - 1;
-      buildCart(currentCount);
+      buildProduct(currentCount);
       return currentCount;
     });
   };
@@ -33,7 +35,7 @@ export function ProductCard(props) {
   const updateByInput = (value) => {
     const num = value ? Number(value) : 0;
     setCount(num);
-    buildCart(num);
+    buildProduct(num);
   };
 
   return (
