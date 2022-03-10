@@ -62,6 +62,10 @@
   appearance: none;
 }
 
+.product-card-quantity-input-container button:hover {
+  cursor: pointer;
+}
+
 .product-card-quantity-input-container button:nth-child( 1 ) {
   background-color: #026b52;
   border-radius: 8px 0 0 8px;

@@ -42,6 +42,11 @@
   cursor: pointer;
 }
 
+.form-container > button:disabled {
+  background-color: #797979;
+  cursor: auto;
+}
+
 .form-container > p {
   color: #ac0000;
 }
