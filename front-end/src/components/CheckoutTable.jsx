@@ -5,6 +5,7 @@ import { removeProduct } from '../redux/slices/productSlice';
 import '../styles/checkout.css';
 
 function CheckoutTable() {
+  // const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
@@ -24,10 +25,6 @@ function CheckoutTable() {
       sum += prod.price * prod.quantity;
     });
     return setTotal(sum);
-  }, [chosenProduct]);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(chosenProduct));
   }, [chosenProduct]);
 
   return (
