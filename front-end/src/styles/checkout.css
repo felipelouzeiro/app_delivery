@@ -1,0 +1,161 @@
+.checkout-page {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 50px;
+}
+
+.checkout-page h2 {
+  align-self: flex-start;
+}
+
+.checkout-table {
+  align-items: flex-end;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.checkout-table table {
+  width: 100%;
+}
+
+.table-product-row {
+  height: 30px;
+}
+
+.table-product-id {
+  background-color: #2fc18c;
+  border-radius: 3px 0 0 3px;
+  text-align: center;
+  width: 10px;
+}
+
+.table-product-name {
+  background-color: #eaf1ef;
+}
+
+.table-product-quantity {
+  background-color: #026b52;
+  color: #eaf1ef;
+  text-align: center;
+}
+
+.table-product-price {
+  background-color: #421981;
+  color: #eaf1ef;
+  font-weight: 500;
+  text-align: center;
+}
+
+.table-product-subtotal {
+  background-color: #3473c7;
+  color: #eaf1ef;
+  font-weight: 500;
+  text-align: center;
+}
+
+.table-product-remove {
+  background-color: #2fc18c;
+  border: none;
+  color: #eaf1ef;
+  font-weight: 500;
+  height: 30px;
+  transition: 0.5s ease;
+  width: 100%;
+}
+
+.table-product-remove:hover {
+  background-color: #15573f;
+  cursor: pointer;
+}
+
+.checkout-table-total-price {
+  background-color: #026b52;
+  border-radius: 5px;
+  color: #eaf1ef;
+  font-weight: 700;
+  margin: 10px;
+  padding: 5px 10px;
+
+}
+
+.checkout-table-total-price > span {
+  color: #eaf1ef;
+  font-weight: 700;
+}
+
+.checkout-address {
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.checkout-address-input-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.checkout-address-input {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 5px;
+  text-align: center;
+}
+
+.checkout-address-input > select {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  margin-top: 8px;
+  padding: 15px 20px;
+}
+
+.checkout-address-input > input {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  margin-top: 8px;
+  padding: 15px 20px;
+}
+
+.checkout-address-input.street-name {
+  flex: 1 1 auto;
+  min-width: 250px;
+  text-align: left;
+}
+
+.checkout-address-input.house-number {
+  width: 10%;
+}
+
+.checkout-button {
+  background-color: #026b52;
+  border: none;
+  border-radius: 5px;
+  color: #eaf1ef;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 10px;
+  padding: 5px 20px;
+  transition: 0.5s ease;
+}
+
+.checkout-button:hover {
+  background-color: #004e3c;
+  cursor: pointer;
+}
+
+.checkout-button:disabled {
+  background-color: #7070703d;
+  cursor: auto;
+}
