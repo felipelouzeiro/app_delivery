@@ -5,13 +5,15 @@ import { CustomerNavbar } from '../components/CustomerNavbar';
 
 function Checkout() {
   return (
-    <div className="product-page">
+    <>
       <CustomerNavbar />
-      <h2>Finalizar Pedido</h2>
-      <CheckoutTable />
-      <h2>Detalhes e endereço para entrega</h2>
-      <CheckoutAddress />
-    </div>
+      <div className="checkout-page">
+        <h2>Finalizar Pedido</h2>
+        <CheckoutTable />
+        <h2>Detalhes e Endereço para Entrega</h2>
+        <CheckoutAddress />
+      </div>
+    </>
   );
 }
 
