@@ -54,6 +54,7 @@ function CheckoutAddress() {
       products,
     };
     const { data } = await postSales(salesData);
+    localStorage.setItem('cart', []);
     history.push(`./orders/${data.id}`);
   };
 
