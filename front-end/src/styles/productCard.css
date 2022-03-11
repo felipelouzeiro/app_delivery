@@ -1,3 +1,8 @@
+.list-product-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .product-card-container {
   align-items: center;
   background-color: #eaf1ef;
