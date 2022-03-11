@@ -75,7 +75,7 @@ function DetailsTable() {
               <td
                 className="table-product-name"
                 data-testid={
-                  `customer_checkout__element-order-table-name-${index}`
+                  `${userData.role}_checkout__element-order-table-name-${index}`
                 }
               >
                 {prod.name}
@@ -83,7 +83,7 @@ function DetailsTable() {
               <td
                 className="table-product-quantity"
                 data-testid={
-                  `customer_checkout__element-order-table-quantity-${index}`
+                  `${userData.role}_checkout__element-order-table-quantity-${index}`
                 }
               >
                 {prod.quantity}
@@ -91,7 +91,7 @@ function DetailsTable() {
               <td
                 className="table-product-price"
                 data-testid={
-                  `customer_checkout__element-order-table-unit-price-${index}`
+                  `${userData.role}_checkout__element-order-table-unit-price-${index}`
                 }
               >
                 { `R$ ${prod.price.replace('.', ',')}` }
@@ -99,7 +99,7 @@ function DetailsTable() {
               <td
                 className="table-product-subtotal"
                 data-testid={
-                  `customer_checkout__element-order-table-sub-total-${index}`
+                  `${userData.role}_checkout__element-order-table-sub-total-${index}`
                 }
               >
                 { `R$ ${totalPriceEachProduct(prod.quantity, prod.price)}` }

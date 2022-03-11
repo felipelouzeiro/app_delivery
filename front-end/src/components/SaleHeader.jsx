@@ -104,7 +104,7 @@ function SaleHeader({ order }) {
           <p
             className="details-table-status"
             style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
-            data-testid={ `${dataTestidCustomerBase}-delivery-status` }
+            data-testid={ `${dataTestidSellerBase}-delivery-status` }
           >
             {currentStatus}
           </p>
