@@ -17,6 +17,10 @@
   width: 40vw;
 }
 
+.card-container:hover {
+  cursor: pointer;
+}
+
 .order-container {
   align-items: center;
   display: flex;
@@ -30,6 +34,7 @@
 .status-container {
   align-items: center;
   border-radius: 5px;
+  color: #eaf1ef;
   display: flex;
   height: 100%;
   justify-content: center;

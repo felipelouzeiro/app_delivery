@@ -34,7 +34,7 @@ function CardMyRequests({ orders }) {
   );
 
   const goToDetails = (idSale) => {
-    history.push(`/customer/orders/${idSale}`);
+    history.push(`/${role}/orders/${idSale}`);
   };
 
   return (
@@ -49,7 +49,7 @@ function CardMyRequests({ orders }) {
           <p>Pedido</p>
           <p
             data-testid={
-              `customer_orders__element-order-id-${id}`
+              `${role}_orders__element-order-id-${id}`
             }
           >
             {`000${id}`}
@@ -59,19 +59,19 @@ function CardMyRequests({ orders }) {
         <div
           className="status-container"
           style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
+          data-testid={ `${role}_orders__element-delivery-status-${id}` }
         >
           <p>{currentStatus}</p>
         </div>
 
         <div className="price-date-container">
           <p
-            data-testid={ `customer_orders__element-order-date-${id}` }
+            data-testid={ `${role}_orders__element-order-date-${id}` }
           >
             {dateFormat}
           </p>
           <p
-            data-testid={ `customer_orders__element-card-price-${id}` }
+            data-testid={ `${role}_orders__element-card-price-${id}` }
           >
             {`R$: ${totalPrice.replace('.', ',')}`}
           </p>

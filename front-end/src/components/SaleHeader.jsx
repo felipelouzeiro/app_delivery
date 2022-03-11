@@ -83,7 +83,7 @@ function SaleHeader({ order }) {
             {currentStatus}
           </p>
           <button
-            className="details-table-mark-as-delivered"
+            className="button-status table-mark-as-delivered"
             type="button"
             data-testid="customer_order_details__button-delivery-check"
             disabled={ deliveryCheck }
@@ -109,6 +109,7 @@ function SaleHeader({ order }) {
             {currentStatus}
           </p>
           <button
+            className="button-status table-mark-as-preparing"
             type="button"
             data-testid="seller_order_details__button-preparing-check"
             disabled={ preparingCheck }
@@ -117,6 +118,7 @@ function SaleHeader({ order }) {
             Preparar pedido
           </button>
           <button
+            className="button-status table-mark-as-checkout"
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
             disabled={ dispatchCheck }

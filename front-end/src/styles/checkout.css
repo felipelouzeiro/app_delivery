@@ -20,23 +20,47 @@
 
 .details-table-status {
   border-radius: 5px;
-  padding: 5px 25px;
-}
-
-.details-table-mark-as-delivered {
-  background-color: #026b52;
-  border: none;
   color: #eaf1ef;
   padding: 5px 25px;
   transition: 0.5s ease;
 }
 
-.details-table-mark-as-delivered:hover {
+.table-mark-as-delivered, .table-mark-as-preparing, .table-mark-as-checkout {
+  border: none;
+  border-radius: 5px;
+  color: #eaf1ef;
+  padding: 5px 25px;
+  transition: 0.5s ease;
+}
+
+.table-mark-as-delivered {
+  background-color: #026b52;
+}
+
+.table-mark-as-preparing {
+  background-color: #2fc18c;
+}
+
+.table-mark-as-preparing:hover {
+  background-color: #1a6449;
+  cursor: pointer;
+}
+
+.table-mark-as-checkout {
+  background-color: #026b52;
+}
+
+.table-mark-as-checkout:hover {
+  background-color: #00271e;
+  cursor: pointer;
+}
+
+.table-mark-as-delivered:hover {
   background-color: #15573f;
   cursor: pointer;
 }
 
-.details-table-mark-as-delivered:disabled {
+.button-status:disabled {
   background-color: #7070703d;
   cursor: auto;
 }
