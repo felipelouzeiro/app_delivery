@@ -4,6 +4,8 @@ import { getAllOrders, getOrderWithProducts } from '../api';
 import productFormater from '../utils/productFormater';
 import SaleHeader from './SaleHeader';
 
+import '../styles/checkout.css';
+
 function DetailsTable() {
   const [chosenProduct, setChosenProduct] = useState([]);
   const [total, setTotal] = useState(0);
@@ -44,7 +46,7 @@ function DetailsTable() {
   }, [chosenProduct]);
 
   return (
-    <div className="checkout-table">
+    <div className="details-table">
       <h3>Detalhes do pedido</h3>
       {
         userOrder.length && <SaleHeader order={ userOrder } />
@@ -63,6 +65,7 @@ function DetailsTable() {
           {userData.role && chosenProduct.length && chosenProduct.map((prod, index) => (
             <tr key={ prod.id }>
               <td
+                className="table-product-id"
                 data-testid={
                   `seller_order_details__element-order-details-label-order-${index}`
                 }
@@ -70,6 +73,7 @@ function DetailsTable() {
                 {index + 1}
               </td>
               <td
+                className="table-product-name"
                 data-testid={
                   `customer_checkout__element-order-table-name-${index}`
                 }
@@ -77,6 +81,7 @@ function DetailsTable() {
                 {prod.name}
               </td>
               <td
+                className="table-product-quantity"
                 data-testid={
                   `customer_checkout__element-order-table-quantity-${index}`
                 }
@@ -84,32 +89,34 @@ function DetailsTable() {
                 {prod.quantity}
               </td>
               <td
+                className="table-product-price"
                 data-testid={
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                {prod.price.replace('.', ',')}
+                { `R$ ${prod.price.replace('.', ',')}` }
               </td>
               <td
+                className="table-product-subtotal"
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                {totalPriceEachProduct(prod.quantity, prod.price)}
+                { `R$ ${totalPriceEachProduct(prod.quantity, prod.price)}` }
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       {userData.role && (
-        <h3>
+        <div className="checkout-table-total-price">
           Total: R$
           <span
             data-testid={ `${userData.role}_order_details__element-order-total-price` }
           >
             {total.toFixed(2).replace('.', ',')}
           </span>
-        </h3>
+        </div>
       )}
     </div>
   );

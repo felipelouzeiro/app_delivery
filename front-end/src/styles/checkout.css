@@ -9,6 +9,47 @@
   align-self: flex-start;
 }
 
+.details-table {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px auto;
+  padding: 20px;
+  width: 80%;
+}
+
+.details-table-status {
+  border-radius: 5px;
+  padding: 5px 25px;
+}
+
+.details-table-mark-as-delivered {
+  background-color: #026b52;
+  border: none;
+  color: #eaf1ef;
+  padding: 5px 25px;
+  transition: 0.5s ease;
+}
+
+.details-table-mark-as-delivered:hover {
+  background-color: #15573f;
+  cursor: pointer;
+}
+
+.details-table-mark-as-delivered:disabled {
+  background-color: #7070703d;
+  cursor: auto;
+}
+
+.details-heading {
+  align-items: center;
+  background-color: #eaf1ef;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
 .checkout-table {
   align-items: flex-end;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px;
@@ -73,13 +114,13 @@
 }
 
 .checkout-table-total-price {
+  align-self: flex-end;
   background-color: #026b52;
   border-radius: 5px;
   color: #eaf1ef;
   font-weight: 700;
   margin: 10px;
   padding: 5px 10px;
-
 }
 
 .checkout-table-total-price > span {
