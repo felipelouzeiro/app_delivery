@@ -1,0 +1,30 @@
+.order-cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.card-container {
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: space-around;
+  margin: 20px;
+  padding: 2px 10px;
+  width: 40vw;
+}
+
+.status-container {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  height: 100%;
+  padding: 0 10px;
+}
+
+.price-date-container, .status-container {
+  font-weight: 600;
+}
