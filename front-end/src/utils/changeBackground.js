@@ -6,9 +6,9 @@ export default (status) => {
     return '#87D53C';
   case 'Em Trânsito':
     return '#421981';
-  case 'Entrege':
+  case 'Entregue':
     return '#3BD5B0';
   default:
-    break;
+    return null;
   }
 };
