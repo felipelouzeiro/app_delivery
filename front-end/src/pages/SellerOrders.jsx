@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 // import socket from '../utils/socketClient';
 import { getAllOrders } from '../api';
 import NavBar from '../components/CustomerNavbar';
-import CardSellerSales from '../components/CardSellerSales';
+import OrdersCards from '../components/OrdersCards';
+
+import '../styles/ordersCard.css';
 
 export default function MyRequests() {
   const [sellerSales, setSellerSales] = useState([]);
@@ -13,16 +15,18 @@ export default function MyRequests() {
   }, []);
 
   return (
-    <div>
+    <main>
       <NavBar />
-      {sellerSales.length && (
-        sellerSales.map((order) => (
-          <CardSellerSales
-            key={ order.id }
-            orders={ order }
-          />
-        ))
-      )}
-    </div>
+      <section className="order-cards-container">
+        {sellerSales.length && (
+          sellerSales.map((order) => (
+            <OrdersCards
+              key={ order.id }
+              orders={ order }
+            />
+          ))
+        )}
+      </section>
+    </main>
   );
 }

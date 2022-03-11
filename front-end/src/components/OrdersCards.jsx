@@ -7,10 +7,9 @@ import changeBackground from '../utils/changeBackground';
 function CardMyRequests({ orders }) {
   const history = useHistory();
 
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { role } = JSON.parse(localStorage.getItem('user'));
 
-  const { role } = token;
-  const { id, saleDate, status, totalPrice, deliveryAdress } = orders;
+  const { id, saleDate, status, totalPrice, deliveryAddress, deliveryNumber } = orders;
 
   const [currentStatus, setCurrentStatus] = useState(status);
 
@@ -29,8 +28,8 @@ function CardMyRequests({ orders }) {
   }, [id]);
 
   const renderAdress = () => (
-    <p data-testid={ `${ADRESS_SELLER}${id}` }>
-      {deliveryAdress}
+    <p className="order-address" data-testid={ `${ADRESS_SELLER}${id}` }>
+      {`${deliveryAddress}, ${deliveryNumber}`}
     </p>
   );
 
@@ -45,37 +44,39 @@ function CardMyRequests({ orders }) {
       onClick={ () => { goToDetails(id); } }
     >
 
-      <div>
-        <p>Pedido</p>
-        <p
-          data-testid={
-            `customer_orders__element-order-id-${id}`
-          }
-        >
-          {`000${id}`}
-        </p>
-      </div>
+      <section className="order-container">
+        <div>
+          <p>Pedido</p>
+          <p
+            data-testid={
+              `customer_orders__element-order-id-${id}`
+            }
+          >
+            {`000${id}`}
+          </p>
+        </div>
 
-      <div
-        className="status-container"
-        style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
-        data-testid={ `customer_orders__element-delivery-status-${id}` }
-      >
-        <p>{currentStatus}</p>
-      </div>
+        <div
+          className="status-container"
+          style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
+          data-testid={ `customer_orders__element-delivery-status-${id}` }
+        >
+          <p>{currentStatus}</p>
+        </div>
 
-      <div className="price-date-container">
-        <p
-          data-testid={ `customer_orders__element-order-date-${id}` }
-        >
-          {dateFormat}
-        </p>
-        <p
-          data-testid={ `customer_orders__element-card-price-${id}` }
-        >
-          {`R$: ${totalPrice.replace('.', ',')}`}
-        </p>
-      </div>
+        <div className="price-date-container">
+          <p
+            data-testid={ `customer_orders__element-order-date-${id}` }
+          >
+            {dateFormat}
+          </p>
+          <p
+            data-testid={ `customer_orders__element-card-price-${id}` }
+          >
+            {`R$: ${totalPrice.replace('.', ',')}`}
+          </p>
+        </div>
+      </section>
 
       {role === 'seller' && renderAdress()}
     </button>
@@ -88,7 +89,8 @@ CardMyRequests.propTypes = {
     saleDate: PropTypes.string,
     status: PropTypes.string,
     totalPrice: PropTypes.string,
-    deliveryAdress: PropTypes.string,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.string,
   }).isRequired,
 };
 
