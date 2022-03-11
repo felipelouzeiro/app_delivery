@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import socket from '../utils/socketClient';
+import changeBackground from '../utils/changeBackground';
 
 function CardMyRequests({ orders }) {
   const history = useHistory();
@@ -39,6 +40,7 @@ function CardMyRequests({ orders }) {
 
   return (
     <button
+      className="card-container"
       type="button"
       onClick={ () => { goToDetails(id); } }
     >
@@ -50,17 +52,19 @@ function CardMyRequests({ orders }) {
             `customer_orders__element-order-id-${id}`
           }
         >
-          {id}
+          {`000${id}`}
         </p>
       </div>
 
       <div
+        className="status-container"
+        style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
         data-testid={ `customer_orders__element-delivery-status-${id}` }
       >
         <p>{currentStatus}</p>
       </div>
 
-      <div>
+      <div className="price-date-container">
         <p
           data-testid={ `customer_orders__element-order-date-${id}` }
         >
@@ -69,7 +73,7 @@ function CardMyRequests({ orders }) {
         <p
           data-testid={ `customer_orders__element-card-price-${id}` }
         >
-          {totalPrice.replace('.', ',')}
+          {`R$: ${totalPrice.replace('.', ',')}`}
         </p>
       </div>
 
