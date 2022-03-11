@@ -4,6 +4,8 @@ import * as yup from 'yup';
 import { createUser } from '../api';
 import { addUser } from '../redux/slices/userSlice';
 
+import '../styles/admin.css';
+
 function AdminForm() {
   const [buttonOn, setButtonOn] = useState(true);
   const [errorDisabled, setErrorDisabled] = useState(false);
@@ -48,7 +50,7 @@ function AdminForm() {
   };
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <form className="admin-form" onSubmit={ handleSubmit }>
       <input
         data-testid="admin_manage__input-name"
         type="text"
