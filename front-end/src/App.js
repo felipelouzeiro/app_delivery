@@ -4,7 +4,7 @@ import './App.css';
 import Product from './pages/Products';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Orders from './pages/MyRequests';
+import Orders from './pages/CustomerOrders';
 import Checkout from './pages/Checkout';
 import SellerOrders from './pages/SellerOrders';
 import OrdersDetails from './pages/OrdersDetails';

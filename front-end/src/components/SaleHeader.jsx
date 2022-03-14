@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getUsers } from '../api';
 import formDate from '../utils/dateFormat';
 import socket from '../utils/socketClient';
+import changeBackground from '../utils/changeBackground';
 
 function SaleHeader({ order }) {
   const { status, id, sellerId, saleDate } = order[0];
@@ -65,19 +66,24 @@ function SaleHeader({ order }) {
     <div className="details-heading">
       {userData.role === 'customer' && (
         <>
-          <p data-testid={ `${dataTestidCustomerBase}-order-id` }>
-            {id}
-          </p>
+          <h3 data-testid={ `${dataTestidCustomerBase}-order-id` }>
+            {`Pedido: 000${id}`}
+          </h3>
           <p data-testid={ `${dataTestidCustomerBase}-seller-name` }>
-            {sellerName}
+            {`P.Vendedora: ${sellerName}`}
           </p>
-          <p data-testid={ `${dataTestidCustomerBase}-order-date` }>
+          <h3 data-testid={ `${dataTestidCustomerBase}-order-date` }>
             {orderdate}
-          </p>
-          <p data-testid={ `${dataTestidCustomerBase}-delivery-status` }>
+          </h3>
+          <p
+            className="details-table-status"
+            style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
+            data-testid={ `${dataTestidCustomerBase}-delivery-status` }
+          >
             {currentStatus}
           </p>
           <button
+            className="button-status table-mark-as-delivered"
             type="button"
             data-testid="customer_order_details__button-delivery-check"
             disabled={ deliveryCheck }
@@ -90,15 +96,20 @@ function SaleHeader({ order }) {
       {userData.role === 'seller' && (
         <>
           <p data-testid={ `${dataTestidSellerBase}-order-id` }>
-            {id}
+            {`Pedido: 000${id}`}
           </p>
-          <p data-testid={ `${dataTestidSellerBase}-order-date` }>
+          <h3 data-testid={ `${dataTestidSellerBase}-order-date` }>
             {orderdate}
-          </p>
-          <p data-testid={ `${dataTestidSellerBase}-delivery-status` }>
+          </h3>
+          <p
+            className="details-table-status"
+            style={ { backgroundColor: `${changeBackground(currentStatus)}` } }
+            data-testid={ `${dataTestidSellerBase}-delivery-status` }
+          >
             {currentStatus}
           </p>
           <button
+            className="button-status table-mark-as-preparing"
             type="button"
             data-testid="seller_order_details__button-preparing-check"
             disabled={ preparingCheck }
@@ -107,6 +118,7 @@ function SaleHeader({ order }) {
             Preparar pedido
           </button>
           <button
+            className="button-status table-mark-as-checkout"
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
             disabled={ dispatchCheck }

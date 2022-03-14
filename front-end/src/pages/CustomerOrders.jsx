@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import socket from '../utils/socketClient';
 import { getAllOrders } from '../api';
 import NavBar from '../components/CustomerNavbar';
 import OrdersCards from '../components/OrdersCards';
@@ -7,19 +6,19 @@ import OrdersCards from '../components/OrdersCards';
 import '../styles/ordersCard.css';
 
 export default function MyRequests() {
-  const [sellerSales, setSellerSales] = useState([]);
+  const [ordersCustomer, setOrdersCustomer] = useState([]);
 
   useEffect(() => {
     getAllOrders()
-      .then(({ sales }) => setSellerSales(sales));
+      .then(({ sales }) => setOrdersCustomer(sales));
   }, []);
 
   return (
     <main>
       <NavBar />
       <section className="order-cards-container">
-        {sellerSales.length && (
-          sellerSales.map((order) => (
+        {ordersCustomer.length && (
+          ordersCustomer.map((order) => (
             <OrdersCards
               key={ order.id }
               orders={ order }

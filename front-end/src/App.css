@@ -1,8 +1,0 @@
-.list-product-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.details-heading {
-  display: flex;
-}

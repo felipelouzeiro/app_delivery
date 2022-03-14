@@ -19,7 +19,7 @@ function AdminTableManagement() {
   };
 
   return (
-    <div className="checkout-table">
+    <div className="users-table">
       { console.log(users) }
       <table>
         <thead>
@@ -35,27 +35,32 @@ function AdminTableManagement() {
           { users.map(({ id, name, email, role }, index) => (
             <tr key={ index }>
               <td
+                className="table-user-id"
                 data-testid={ `admin_manage__element-user-table-item-number-${id}` }
               >
                 { index + 1 }
               </td>
               <td
+                className="table-user-name"
                 data-testid={ `admin_manage__element-user-table-name-${id}` }
               >
                 { name }
               </td>
               <td
+                className="table-user-email"
                 data-testid={ `admin_manage__element-user-table-email-${id}` }
               >
                 { email }
               </td>
               <td
+                className="table-user-role"
                 data-testid={ `admin_manage__element-user-table-role-${id}` }
               >
                 { renderRole(role) }
               </td>
               <td>
                 <button
+                  className="table-user-remove "
                   type="button"
                   data-testid={ `admin_manage__element-user-table-remove-${index}` }
                   onClick={ () => removeUserById(id) }

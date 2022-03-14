@@ -8,13 +8,18 @@ export const chosenProductsSlice = createSlice({
   name: 'chosenProduct',
   initialState,
   reducers: {
+    buildCart: (state, action) => {
+      state.chosenProducts = action.payload;
+    },
     addProduct: (state, action) => {
       const otherProducts = state.chosenProducts
         .filter((prod) => prod.id !== action.payload.id);
+
       state.chosenProducts = [
         ...otherProducts,
         action.payload,
       ];
+
       const validProducts = state.chosenProducts.filter((prod) => prod.quantity > 0);
       state.chosenProducts = [...validProducts];
     },
@@ -26,6 +31,6 @@ export const chosenProductsSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct } = chosenProductsSlice.actions;
+export const { buildCart, addProduct, removeProduct } = chosenProductsSlice.actions;
 
 export default chosenProductsSlice.reducer;
