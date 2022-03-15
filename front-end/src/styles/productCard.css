@@ -1,0 +1,118 @@
+.list-product-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.product-card-container {
+  align-items: center;
+  background-color: #eaf1ef;
+  border: 0.5px solid rgba(128, 128, 128, 0.322);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  display: flex;
+  flex-flow: column wrap;
+  height: 44vh;
+  justify-content: space-between;
+  margin: 2vh 1vw;
+  max-width: 300px;
+  min-height: 200px;
+  min-width: 250px;
+  position: relative;
+  width: 30vw;
+}
+
+.product-card-image-container {
+  height: 70%;
+  position: relative;
+  width: 100%;
+}
+
+.product-card-image {
+  height: 100%;
+  width: 100%;
+}
+
+.product-price {
+  background-color: #9696961e;
+  border-radius: 5px;
+  left: 5px;
+  padding: 5px;
+  position: absolute;
+  top: 5px;
+}
+
+.product-card-quantity-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.product-card-quantity-input-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.product-card-quantity-input-container input {
+  appearance: none;
+  border-radius: 0;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  width: 50px;
+}
+
+.product-card-quantity-input-container input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.product-card-quantity-input-container button:hover {
+  cursor: pointer;
+}
+
+.product-card-quantity-input-container button:nth-child( 1 ) {
+  background-color: #026b52;
+  border-radius: 8px 0 0 8px;
+  color: #eaf1ef;
+  font-size: 1.5rem;
+  font-weight: 700;
+  height: 100%;
+  width: 25px;
+}
+
+.product-card-quantity-input-container button:nth-child( 3 ) {
+  background-color: #026b52;
+  border-radius: 0 8px 8px 0;
+  color: #eaf1ef;
+  font-size: 1.5rem;
+  height: 100%;
+  width: 25px;
+}
+
+.product-checkout-button {
+  background-color: #026b52;
+  border: none;
+  border-radius: 5px;
+  bottom: 1vh;
+  color: #eaf1ef;
+  font-size: 1.3rem;
+  max-width: 300px;
+  min-width: 250px;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  transition: 0.5s ease;
+  width: 28vw;
+}
+
+.product-checkout-button:hover {
+  background-color: #003025;
+  cursor: pointer;
+}
+
+.product-checkout-button:disabled {
+  background-color: #797979;
+  cursor: auto;
+}
+

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getProducts } from '../api';
 import { ProductCard } from './ProductCard';
+import { buildCart } from '../redux/slices/productSlice';
+
+import '../styles/productCard.css';
 
 export function ListProducts() {
   const [products, setProducts] = useState([]);
@@ -10,11 +13,22 @@ export function ListProducts() {
   const [buttonCart, setButtonCart] = useState(true);
   const chosenProduct = useSelector((state) => state.chosenProduct.chosenProducts);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const checkout = () => {
     if (chosenProduct.length === 0) return null;
+    localStorage.setItem('cart', JSON.stringify(chosenProduct));
     history.push('/customer/checkout');
   };
+
+  useEffect(() => {
+    const localStorageCart = JSON.parse(localStorage.getItem('cart')) || [];
+    dispatch(buildCart(localStorageCart));
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(chosenProduct));
+  }, [chosenProduct]);
 
   useEffect(() => {
     getProducts()
@@ -47,6 +61,7 @@ export function ListProducts() {
       </div>
       <button
         type="button"
+        className="product-checkout-button"
         onClick={ checkout }
         disabled={ buttonCart }
         data-testid="customer_products__button-cart"

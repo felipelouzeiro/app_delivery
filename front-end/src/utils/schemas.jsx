@@ -9,4 +9,12 @@ export const registerSchema = yup.object({
   password: yup.string().min(MIN_PASSWORD_NUMBER).required(),
 });
 
-export default registerSchema;
+export const checkoutSchema = yup.object({
+  address: yup.string().required(),
+  number: yup.string().required(),
+});
+
+export const loginSchema = yup.object({
+  login: yup.string().email().required(),
+  password: yup.string().min(MIN_PASSWORD_NUMBER).required(),
+});
